@@ -30,8 +30,8 @@
         android:layout_column="1"
         android:layout_marginLeft="280dp"
         android:layout_marginTop="130dp"
-        android:layout_x="424dp"
-        android:layout_y="121dp"
+        android:layout_x="420dp"
+        android:layout_y="123dp"
         android:background="#313435"
         android:backgroundTint="#313435"
         android:src="@drawable/iconovirus" />
