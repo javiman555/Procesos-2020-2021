@@ -26,8 +26,10 @@ public class MainActivity extends AppCompatActivity {
         ajustesFondo = (ImageView) findViewById(R.id.ajustesFondo);
 
         ivBoton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v){
-                //finish();
+                System.exit(0);
+                //finish()
             }
         });
         botonAjustes.setOnClickListener(new View.OnClickListener() {

@@ -108,7 +108,10 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(SplashActivity.this,MainActivity.class);
                 setContentView(R.layout.activity_main);
-                //finish();
+                finish(intent);
+            }
+
+            private void finish(Intent intent) {
             }
         },2000);
 
