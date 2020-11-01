@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         ivBoton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v){
-                finish();
+                //finish();
             }
         });
     }
