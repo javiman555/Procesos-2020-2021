@@ -73,4 +73,16 @@
         android:visibility="invisible"
         app:srcCompat="@drawable/ajustesfondo" />
 
+    <Button
+        android:id="@+id/botonjugar"
+        android:layout_width="156dp"
+        android:layout_height="96dp"
+        android:layout_x="147dp"
+        android:layout_y="304dp"
+        android:backgroundTint="#000000"
+        android:clickable="true"
+        android:text="JUGAR"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp" />
+
 </AbsoluteLayout>

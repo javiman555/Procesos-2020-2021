@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView ivBoton;
     ImageView botonAjustes;
     ImageView ajustesFondo;
+    ImageView botonJugar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ajustesFondo.setVisibility(View.INVISIBLE);
+            }
+        });
+        botonJugar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                //EmperzarPartida()
             }
         });
     }
