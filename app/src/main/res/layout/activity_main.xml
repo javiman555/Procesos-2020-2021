@@ -24,19 +24,6 @@
         app:srcCompat="@drawable/botonajustes" />
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="51dp"
-        android:layout_row="0"
-        android:layout_column="1"
-        android:layout_marginLeft="280dp"
-        android:layout_marginTop="130dp"
-        android:layout_x="400dp"
-        android:layout_y="133dp"
-        android:background="#313435"
-        android:backgroundTint="#313435"
-        android:src="@drawable/iconovirus" />
-
-    <ImageView
         android:id="@+id/ivBoton"
         android:layout_width="49dp"
         android:layout_height="56dp"
@@ -50,13 +37,17 @@
         android:visibility="visible" />
 
     <ImageView
-        android:id="@+id/ajustesFondo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:visibility="invisible"
-        app:srcCompat="@drawable/ajustesfondo" />
+        android:layout_width="50dp"
+        android:layout_height="51dp"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="130dp"
+        android:layout_x="400dp"
+        android:layout_y="133dp"
+        android:background="#313435"
+        android:backgroundTint="#313435"
+        android:src="@drawable/iconovirus" />
 
     <TextView
         android:id="@+id/textView2"
@@ -70,5 +61,16 @@
         android:text="NOMBREAPP"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:drawableTint="#050505" />
+
+    <ImageView
+        android:id="@+id/ajustesFondo"
+        android:layout_width="858dp"
+        android:layout_height="521dp"
+        android:layout_gravity="center"
+        android:layout_weight="10"
+        android:layout_x="-57dp"
+        android:layout_y="-41dp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ajustesfondo" />
 
 </AbsoluteLayout>
