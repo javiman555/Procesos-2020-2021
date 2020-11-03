@@ -1,17 +1,20 @@
 package com.example.pracprocesos;
 
+import java.util.ArrayList;
+
 public class Ciudad {
 
     private String nombre;
     private String comunidad;
     private int poblacion;
-    private int densidad;
+    private float densidad;
     private int sanos;
     private int infectados;
     private int totalsanitario;
     private int hospitalizados;
+    private ArrayList<String> colindantes;
 
-    public Ciudad(String nombre, String comunidad, int poblacion, int sanos, int infectados, int totalsanitario, int hospitalizados) {
+    public Ciudad(String nombre, String comunidad, float densidad, int poblacion, int sanos, int infectados, int totalsanitario, int hospitalizados, ArrayList<String> colindantes) {
         this.nombre = nombre;
         this.comunidad = comunidad;
         this.poblacion = poblacion;
@@ -20,6 +23,7 @@ public class Ciudad {
         this.infectados = infectados;
         this.totalsanitario = totalsanitario;
         this.hospitalizados = hospitalizados;
+        this.colindantes = colindantes;
     }
 
     public String getNombre() {
@@ -46,7 +50,7 @@ public class Ciudad {
         this.poblacion = poblacion;
     }
 
-    public int getDensidad() {
+    public float getDensidad() {
         return densidad;
     }
 
@@ -86,5 +90,11 @@ public class Ciudad {
         this.hospitalizados = hospitalizados;
     }
 
-    
+    public ArrayList<String> getColindantes() {
+        return colindantes;
+    }
+
+    public void setColindantes(ArrayList<String> colindantes) {
+        this.colindantes = colindantes;
+    }
 }

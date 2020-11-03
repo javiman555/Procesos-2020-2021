@@ -1,0 +1,9 @@
+Sevilla
+Andalucía
+123.45 (densidad)
+24563457 (poblacion)
+43524345 (sanos)
+567575 (infectados)
+234534 (totalsanitario)
+45676 (hospitalizados)
+Córdoba, Huelva, Madrid (colindantes)
