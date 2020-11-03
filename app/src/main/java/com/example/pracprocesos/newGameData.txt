@@ -1,5 +1,5 @@
-Sevilla
-Andalucía
+Capital
+Comunidad
 123.45 (densidad)
 24563457 (poblacion)
 43524345 (sanos)
@@ -7,3 +7,117 @@ Andalucía
 234534 (totalsanitario)
 45676 (hospitalizados)
 Córdoba, Huelva, Madrid (colindantes)
+Sevilla
+Andalucía
+4896.55
+688592
+688592
+0
+3731
+0
+-Colindantes-
+Zaragoza
+Aragón
+682.84
+674997
+674997
+0
+3905
+0
+-Colindantes-
+Oviedo
+Asturias
+1180.29
+220406
+220406
+0
+1039
+0
+-Colindantes-
+Palma de Mallorca
+Islas Baleares
+1948.39
+416065
+416065
+0
+1381
+0
+-Colindantes-
+Santa Cruz de Tenerife
+Canarias
+1376.94
+207312
+207312
+0
+960
+0
+-Colindantes-
+Las Palmas de Gran Canaria
+Canarias
+3755.84
+379925
+379925
+0
+1465
+0
+-Colindantes-
+Santander
+Cantabria
+4765.83
+172539
+172539
+0
+907
+0
+-Colindantes-
+Toledo
+Castilla-La Mancha
+360.8
+84873
+84873
+0
+1359
+0
+-Colindantes-
+Valladolid
+Castilla y León
+1514.4
+298412
+298412
+0
+1366
+0
+-Colindantes-
+Barcelona
+Cataluña
+15992.2
+1636762
+1636762
+0
+13997
+0
+-Colindantes-
+Ceuta
+Ceuta
+4582.54
+85209
+85209
+0
+292
+0
+-Colindantes-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
