@@ -5,6 +5,7 @@ public class Ciudad {
     private String nombre;
     private String comunidad;
     private int poblacion;
+    private int densidad;
     private int sanos;
     private int infectados;
     private int totalsanitario;
@@ -14,6 +15,7 @@ public class Ciudad {
         this.nombre = nombre;
         this.comunidad = comunidad;
         this.poblacion = poblacion;
+        this.densidad = densidad;
         this.sanos = sanos;
         this.infectados = infectados;
         this.totalsanitario = totalsanitario;
@@ -42,6 +44,14 @@ public class Ciudad {
 
     public void setPoblacion(int poblacion) {
         this.poblacion = poblacion;
+    }
+
+    public int getDensidad() {
+        return densidad;
+    }
+
+    public void setDensidad(int densidad) {
+        this.densidad = densidad;
     }
 
     public int getSanos() {
