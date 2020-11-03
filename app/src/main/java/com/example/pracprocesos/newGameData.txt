@@ -107,7 +107,95 @@ Ceuta
 0
 -Colindantes-
 
+Merida
+Extremadura
+68.41
+59335
+59335
+0
+184
+0
+(colindantes)
 
+Santiago de Compostela
+Galicia
+438.42
+97260
+97260
+0
+272
+0
+(colindantes)
+
+Logroño
+La Rioja
+1897.91
+151136
+151136
+0
+453
+0
+(colindantes)
+
+Madird
+Comunidad de Madrid
+5265.91
+3266126
+3266126
+0
+6205
+0
+(colindantes)
+
+Melilla
+Melilla
+7009.81
+84708
+84708
+0
+169
+0
+(colindantes)
+
+Murcia
+Region de Murcia
+513.98
+453258
+453258
+0
+1042
+0
+(colindantes)
+
+Pamplona
+Navarra
+7841.61
+201653
+201653
+0
+464
+0
+(colindantes)
+
+Valencia
+Comunidad Valenciana
+5850.78
+794288
+794288
+0
+1589
+0
+(colindantes)
+
+Vitoria
+Pais Vasco
+894.58
+251774
+251774
+0
+656
+0
+(colindantes)
 
 
 
