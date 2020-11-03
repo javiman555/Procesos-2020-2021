@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         ivBoton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                //finish();
+                finish();
             }
         });
         botonAjustes.setOnClickListener(new View.OnClickListener() {
@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
                 ajustesFondo.setVisibility(View.INVISIBLE);
             }
         });
-        botonJugar.setOnClickListener(new View.OnClickListener() {
+        /*botonJugar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 //EmperzarPartida()
             }
-        });
+        });*/ //Comentado porque peta
     }
 }
