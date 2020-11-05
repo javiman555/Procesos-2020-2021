@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView botonAjustes;
     ImageView ajustesFondo;
     ImageView botonJugar;
+    ImageView botonInfo;
+    ImageView infofondo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         ivBoton = (ImageView) findViewById(R.id.ivBoton);
         botonAjustes = (ImageView) findViewById(R.id.botonAjustes);
         ajustesFondo = (ImageView) findViewById(R.id.ajustesFondo);
+        botonInfo =  (ImageView) findViewById(R.id.info);
+        //infofondo = (ImageView) findViewById(R.id.infofondo);
 
         ivBoton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
@@ -42,10 +46,11 @@ public class MainActivity extends AppCompatActivity {
                 ajustesFondo.setVisibility(View.INVISIBLE);
             }
         });
-        /*botonJugar.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){
-                //EmperzarPartida()
-            }
-        });*/ //Comentado porque peta
+        botonInfo.setOnClickListener(new View.OnClickListener() {
+           public void onClick(View v){
+               infofondo.setVisibility(View.VISIBLE);
+          }
+        });
+
     }
 }
