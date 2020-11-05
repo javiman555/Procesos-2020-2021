@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/mapa_juego"
-        tools:layout_editor_absoluteX="-73dp"
+        tools:layout_editor_absoluteX="-113dp"
         tools:layout_editor_absoluteY="0dp" />
 
     <ImageView
@@ -19,7 +19,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/bacterias__2_"
-        tools:layout_editor_absoluteX="452dp"
+        tools:layout_editor_absoluteX="448dp"
         tools:layout_editor_absoluteY="0dp" />
+
+    <RadioButton
+        android:id="@+id/radioButton"
+        android:layout_width="28dp"
+        android:layout_height="36dp"
+        android:buttonTint="#F44336"
+        tools:layout_editor_absoluteX="217dp"
+        tools:layout_editor_absoluteY="266dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
