@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
                 ajustesFondo.setVisibility(View.INVISIBLE);
             }
         });
-        botonInfo.setOnClickListener(new View.OnClickListener() {
+        /*botonInfo.setOnClickListener(new View.OnClickListener() {
            public void onClick(View v){
                infofondo.setVisibility(View.VISIBLE);
           }
-        });
+        });*/
 
     }
 }

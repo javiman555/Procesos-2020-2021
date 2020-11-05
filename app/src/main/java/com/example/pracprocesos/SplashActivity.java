@@ -79,7 +79,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-                //setContentView(R.layout.activity_main);
+                setContentView(R.layout.activity_main);
                 startActivity(intent);
                 finish();
             }
@@ -87,7 +87,7 @@ public class SplashActivity extends AppCompatActivity {
 
         mVisible = true;
         //mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.fullscreen_content);
+        //mContentView = findViewById(R.id.fullscreen_content);
 
 
         // Upon interacting with UI controls, delay any scheduled hide()
