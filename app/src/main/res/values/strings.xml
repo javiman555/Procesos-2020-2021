@@ -5,4 +5,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="ajedile_knights">A(jed)ile Knights</string>
     <string name="nombre_aplicacion">NOMBREAPP</string>
+    <string name="fondo_men">Fondo menú</string>
+    <string name="mapa">Mapa</string>
+    <string name="acciones">Acciones</string>
 </resources>
