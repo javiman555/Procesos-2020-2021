@@ -3,9 +3,11 @@ package com.example.pracprocesos;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView ivBoton;
     ImageView botonAjustes;
     ImageView ajustesFondo;
-    ImageView botonJugar;
+    Button botonJugar;
     ImageView botonInfo;
     ImageView infofondo;
 
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         ajustesFondo = (ImageView) findViewById(R.id.ajustesFondo);
         botonInfo =  (ImageView) findViewById(R.id.info);
         //infofondo = (ImageView) findViewById(R.id.infofondo);
+        botonJugar = (Button) findViewById(R.id.botonjugar);
 
         ivBoton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
@@ -51,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
                infofondo.setVisibility(View.VISIBLE);
           }
         });*/
+        botonJugar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,MapActivity.class);
+                setContentView(R.layout.activity_map);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 }
