@@ -1,9 +1,7 @@
 package com.example.pracprocesos;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class IOData {
 
@@ -21,19 +19,39 @@ public class IOData {
             int poblacion = sc.nextInt();
             int sanos = sc.nextInt();
             int infectados = sc.nextInt();
+            int muertos = sc.nextInt();
             int totalsanitario = sc.nextInt();
             int hospitalizados = sc.nextInt();
             String colindantes = sc.nextLine();
+            String puertos = sc.nextLine();
+            String aeropuertos = sc.nextLine();
 
-            ArrayList<String> listaColindantes = new ArrayList<String>();
-            String[] arrayColindantes = colindantes.toString().split(", ");
-            for (int i = 0; i < arrayColindantes.length; i++){
-                listaColindantes.add(arrayColindantes[i]);
-            }
+            ArrayList<String> listaColindantes = stringToList(colindantes);
+            ArrayList<String> listaPuertos = stringToList(puertos);
+            ArrayList<String> listaAeropuertos = stringToList(aeropuertos);
 
-            Ciudad ciu =
-                new Ciudad(nombre, comunidad, densidad, poblacion, sanos, infectados, totalsanitario, hospitalizados, listaColindantes);
+            Ciudad ciu = new Ciudad(nombre,
+                            comunidad,
+                            densidad,
+                            poblacion,
+                            sanos,
+                            infectados,
+                            muertos,
+                            totalsanitario,
+                            hospitalizados,
+                            listaColindantes,
+                            listaPuertos,
+                            listaAeropuertos);
             mapa.put(nombre, ciu);
         }
+    }
+
+    public ArrayList<String> stringToList(String s){
+        ArrayList<String> lista = new ArrayList<String>();
+        String[] array = s.split(", ");
+        for (int i = 0; i < array.length; i++){
+            lista.add(array[i]);
+        }
+        return lista;
     }
 }

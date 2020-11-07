@@ -10,20 +10,26 @@ public class Ciudad {
     private float densidad;
     private int sanos;
     private int infectados;
+    private int muertos;
     private int totalsanitario;
     private int hospitalizados;
     private ArrayList<String> colindantes;
+    private ArrayList<String> puertos;
+    private ArrayList<String> aeropuertos;
 
-    public Ciudad(String nombre, String comunidad, float densidad, int poblacion, int sanos, int infectados, int totalsanitario, int hospitalizados, ArrayList<String> colindantes) {
+    public Ciudad(String nombre, String comunidad, float v, float densidad, int poblacion, int sanos, int infectados, int totalsanitario, int hospitalizados, ArrayList<String> listaColindantes, ArrayList<String> listaPuertos, ArrayList<String> colindantes) {
         this.nombre = nombre;
         this.comunidad = comunidad;
         this.poblacion = poblacion;
         this.densidad = densidad;
         this.sanos = sanos;
         this.infectados = infectados;
+        this.muertos = muertos;
         this.totalsanitario = totalsanitario;
         this.hospitalizados = hospitalizados;
         this.colindantes = colindantes;
+        this.puertos = puertos;
+        this.aeropuertos = aeropuertos;
     }
 
     public String getNombre() {
@@ -74,6 +80,14 @@ public class Ciudad {
         this.infectados = infectados;
     }
 
+    public int getMuertos() {
+        return muertos;
+    }
+
+    public void setMuertos(int muertos) {
+        this.muertos = muertos;
+    }
+
     public int getTotalsanitario() {
         return totalsanitario;
     }
@@ -96,5 +110,21 @@ public class Ciudad {
 
     public void setColindantes(ArrayList<String> colindantes) {
         this.colindantes = colindantes;
+    }
+
+    public ArrayList<String> getPuertos() {
+        return puertos;
+    }
+
+    public void setPuertos(ArrayList<String> puertos) {
+        this.puertos = puertos;
+    }
+
+    public ArrayList<String> getAeropuertos() {
+        return aeropuertos;
+    }
+
+    public void setAeropuertos(ArrayList<String> aeropuertos) {
+        this.aeropuertos = aeropuertos;
     }
 }
