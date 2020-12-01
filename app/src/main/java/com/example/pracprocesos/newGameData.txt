@@ -7,6 +7,8 @@ Comunidad
 234534 (totalsanitario)
 45676 (hospitalizados)
 Córdoba, Huelva, Madrid (colindantes)
+(puertos) [Si no hay nada se deja la línea vacía]
+(aeropuertos)
 Sevilla
 Andalucía
 4896.55
