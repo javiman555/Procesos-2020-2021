@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button botonJugar;
     ImageView botonInfo;
     ImageView infofondo;
+    ImageView botonhelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         botonInfo =  (ImageView) findViewById(R.id.info);
         //infofondo = (ImageView) findViewById(R.id.infofondo);
         botonJugar = (Button) findViewById(R.id.botonjugar);
+        botonhelp = (ImageView) findViewById(R.id.botonhelp);
 
         ivBoton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
@@ -47,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ajustesFondo.setVisibility(View.INVISIBLE);
+            }
+        });
+        botonhelp.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){ajustesFondo.setVisibility(View.VISIBLE);
+
             }
         });
         /*botonInfo.setOnClickListener(new View.OnClickListener() {
