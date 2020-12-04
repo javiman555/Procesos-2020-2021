@@ -60,7 +60,7 @@
         android:layout_marginBottom="16dp"
         android:text="@string/nombre_aplicacion"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
         app:drawableTint="#000000"
         app:layout_constraintBottom_toTopOf="@+id/botonjugar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,6 +74,18 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="Fondo ajustes"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ajustesfondo" />
+
+    <ImageView
+        android:id="@+id/infofondo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="Fondo info"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,10 +114,31 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:backgroundTint="@color/black"
+        android:contentDescription="Info"
         android:scaleType="centerCrop"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botonAjustes"
         app:srcCompat="@drawable/info_white" />
+
+    <TextView
+        android:id="@+id/txtView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/ajustesfondo"
+        android:visibility="invisible"
+        android:text="MAKE.YOUR.COVID"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <ImageView
         android:id="@+id/botonhelp"
@@ -118,6 +151,6 @@
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botonInfo"
-        app:srcCompat="@drawable/botonhelp"/>
+        app:srcCompat="@drawable/botonhelp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
