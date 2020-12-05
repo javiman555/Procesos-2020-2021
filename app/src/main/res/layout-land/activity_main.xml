@@ -75,6 +75,7 @@
         android:layout_height="0dp"
         android:contentDescription="Fondo ajustes"
         android:visibility="invisible"
+        android:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,16 +83,17 @@
         app:srcCompat="@drawable/ajustesfondo" />
 
     <ImageView
-        android:id="@+id/infofondo"
+        android:id="@+id/fondoInfo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="Fondo info"
         android:visibility="invisible"
+        android:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ajustesfondo" />
+        app:srcCompat="@drawable/fondoinfo" />
 
     <Button
         android:id="@+id/botonjugar"
@@ -120,25 +122,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botonAjustes"
         app:srcCompat="@drawable/info_white" />
-
-    <TextView
-        android:id="@+id/txtView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/ajustesfondo"
-        android:visibility="invisible"
-        android:text="MAKE.YOUR.COVID"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
 
     <ImageView
         android:id="@+id/botonhelp"

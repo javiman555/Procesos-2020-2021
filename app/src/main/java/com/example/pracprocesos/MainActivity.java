@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView ivBoton;
     ImageView botonAjustes;
     ImageView ajustesFondo;
+    ImageView fondoinfo;
     Button botonJugar;
     ImageView botonInfo;
     ImageView botonhelp;
@@ -31,9 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ivBoton = (ImageView) findViewById(R.id.ivBoton);
         botonAjustes = (ImageView) findViewById(R.id.botonAjustes);
         ajustesFondo = (ImageView) findViewById(R.id.ajustesFondo);
-        //infofondo = (ImageView) findViewById(R.id.infofondo);
+        fondoinfo = (ImageView) findViewById(R.id.fondoInfo);
         botonInfo =  (ImageView) findViewById(R.id.botonInfo);
-        txtView = (TextView) findViewById(R.id.txtView);
         botonJugar = (Button) findViewById(R.id.botonjugar);
         botonhelp = (ImageView) findViewById(R.id.botonhelp);
 
@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         botonInfo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                txtView.setVisibility(View.VISIBLE);
+                fondoinfo.setVisibility(View.VISIBLE);
             }
         });
-        txtView.setOnClickListener(new View.OnClickListener() {
+        fondoinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtView.setVisibility(View.INVISIBLE);
+                fondoinfo.setVisibility(View.INVISIBLE);
             }
         });
         botonhelp.setOnClickListener(new View.OnClickListener() {
