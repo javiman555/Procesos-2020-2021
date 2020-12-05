@@ -16,7 +16,7 @@ public class Virus {
 
     public Virus(String nombre){
         this.nombre = nombre;
-        this.sanos = 10000000;
+        this.sanos = 10921241;
         this.infectados = 0;
         this.muertos = 0;
         this.mortalidad=0.05;

@@ -9,10 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".SelectVirusActivity"></activity>
+        <activity
+            android:name=".SelectVirusActivity"
+            android:screenOrientation="landscape"
+        />
         <activity
             android:name=".MapActivity"
             android:screenOrientation="landscape" />
+
         <activity
             android:name=".SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

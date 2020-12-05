@@ -11,15 +11,14 @@
         android:id="@+id/text"
         android:layout_width="732dp"
         android:layout_height="82dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Pon nombre a tu virus"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="52sp"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:layout_editor_absoluteY="57dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/nombreVirus"
