@@ -1,0 +1,33 @@
+package com.example.pracprocesos;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class SelectVirusActivity extends AppCompatActivity {
+
+    Button botonComenzar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_select_virus);
+
+        botonComenzar = (Button) findViewById(R.id.botoncomenzar);
+
+        botonComenzar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectVirusActivity.this,MapActivity.class);
+                setContentView(R.layout.activity_map);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+
+    }
+}

@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         botonJugar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MapActivity.class);
-                setContentView(R.layout.activity_map);
+                Intent intent = new Intent(MainActivity.this,SelectVirusActivity.class);
+                setContentView(R.layout.activity_select_virus);
                 startActivity(intent);
                 finish();
             }
