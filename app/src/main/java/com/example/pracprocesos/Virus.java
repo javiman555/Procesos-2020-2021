@@ -1,6 +1,8 @@
 package com.example.pracprocesos;
 
-public class Virus {
+import java.io.Serializable;
+
+public class Virus implements Serializable {
 
     private String nombre;
     private int sanos;
