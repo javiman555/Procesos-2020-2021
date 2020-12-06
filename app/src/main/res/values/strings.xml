@@ -8,4 +8,12 @@
     <string name="fondo_men">Fondo menú</string>
     <string name="mapa">Mapa</string>
     <string name="acciones">Acciones</string>
+    <string name="icono_app">Icono app</string>
+    <string name="salir">Salir</string>
+    <string name="fondo_ajustes">Fondo ajustes</string>
+    <string name="fondo_info">Fondo info</string>
+    <string name="jugar">JUGAR</string>
+    <string name="info">Info</string>
+    <string name="bot_n_de_ayuda">Botón de ayuda</string>
+    <string name="ajustes">Ajustes</string>
 </resources>
