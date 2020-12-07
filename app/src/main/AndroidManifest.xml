@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Help_popup"
+        <activity
+            android:name=".Help_popup"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.Temapopup">
+        </activity>
+        <activity
+            android:name=".info_popup"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.Temapopup">
         </activity>

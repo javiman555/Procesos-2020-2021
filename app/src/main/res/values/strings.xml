@@ -18,5 +18,6 @@
     <string name="ajustes">Ajustes</string>
     <string name="text_help">
     "Este juego te permite infectar a la población española en función de las ciudades que selecciones para que comience a expandirse el virus."</string>
-
+    <string name="text_info">
+    MAKE.YOUR.COVID</string>
 </resources>

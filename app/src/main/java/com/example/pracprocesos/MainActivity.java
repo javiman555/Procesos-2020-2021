@@ -11,12 +11,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
 
     ImageView ivBoton;
     ImageView botonAjustes;
     ImageView ajustesFondo;
-    ImageView fondoinfo;
+    //ImageView fondoinfo;
     Button botonJugar;
     ImageView botonInfo;
     ImageView botonhelp;
@@ -32,12 +32,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ivBoton = (ImageView) findViewById(R.id.ivBoton);
         botonAjustes = (ImageView) findViewById(R.id.botonAjustes);
         ajustesFondo = (ImageView) findViewById(R.id.ajustesFondo);
-        fondoinfo = (ImageView) findViewById(R.id.fondoInfo);
+        //fondoinfo = (ImageView) findViewById(R.id.fondoInfo);
         botonInfo =  (ImageView) findViewById(R.id.botonInfo);
         botonJugar = (Button) findViewById(R.id.botonjugar);
         botonhelp = (ImageView) findViewById(R.id.botonhelp);
 
-        botonInfo.setOnClickListener(this);
 
         ivBoton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
@@ -58,15 +57,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         botonInfo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                fondoinfo.setVisibility(View.VISIBLE);
+                startActivity(new Intent(MainActivity.this,info_popup.class));
             }
         });
-        fondoinfo.setOnClickListener(new View.OnClickListener() {
+        /*fondoinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fondoinfo.setVisibility(View.INVISIBLE);
             }
-        });
+        });*/
         botonhelp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 startActivity(new Intent(MainActivity.this,Help_popup.class));
@@ -81,14 +80,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
             }
         });
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.botonInfo:
-                txtView.append("Creado por A(jed)ile Knights");
-                break;
-        }
     }
 }
