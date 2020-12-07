@@ -16,4 +16,7 @@
     <string name="info">Info</string>
     <string name="bot_n_de_ayuda">Botón de ayuda</string>
     <string name="ajustes">Ajustes</string>
+    <string name="text_help">
+    "Este juego te permite infectar a la población española en función de las ciudades que selecciones para que comience a expandirse el virus."</string>
+
 </resources>

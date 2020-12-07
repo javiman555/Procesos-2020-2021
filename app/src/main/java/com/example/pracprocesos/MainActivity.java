@@ -68,7 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         botonhelp.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){ajustesFondo.setVisibility(View.VISIBLE);
+            public void onClick(View v){
+                startActivity(new Intent(MainActivity.this,Help_popup.class));
 
             }
         });
