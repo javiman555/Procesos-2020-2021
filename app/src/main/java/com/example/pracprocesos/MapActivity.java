@@ -120,7 +120,7 @@ public class MapActivity extends AppCompatActivity {
         else if (colorSimilar(color, Color.parseColor("#669BA1"))) {
             System.out.println("Palma de Mallorca");
         }
-        else if (colorSimilar(color, Color.parseColor("#FF9700"))) {
+        else if (colorSimilar(color, Color.parseColor("#009D78"))) {
             System.out.println("Murcia");
         }
         else if (colorSimilar(color, Color.parseColor("#FF3A3A"))) {
@@ -132,7 +132,7 @@ public class MapActivity extends AppCompatActivity {
         else if (colorSimilar(color, Color.parseColor("#FFA6FE"))) {
             System.out.println("Algeciras");
         }
-        else if (colorSimilar(color, Color.parseColor("#C4EBFC"))) {
+        else if (colorSimilar(color, Color.parseColor("#D5D5D5"))) {
             System.out.println("Ceuta");
         }
         else if (colorSimilar(color, Color.parseColor("#434343"))) {
