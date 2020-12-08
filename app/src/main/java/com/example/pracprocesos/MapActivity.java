@@ -79,34 +79,70 @@ public class MapActivity extends AppCompatActivity {
         int color = colorDePunto(coord_x,coord_y);
 
         if (colorSimilar(color, Color.parseColor("#A24FFF"))) {
-            System.out.println("Castilla y León");
+            System.out.println("Valladolid");
         }
         else if (colorSimilar(color, Color.parseColor("#FFCB7F"))) {
-            System.out.println("Galicia");
+            System.out.println("Santiago de Compostela");
         }
         else if (colorSimilar(color, Color.parseColor("#D2A9CB"))) {
-            System.out.println("Asturias");
+            System.out.println("Oviedo");
         }
         else if (colorSimilar(color, Color.parseColor("#F07995"))) {
-            System.out.println("Cantabria");
+            System.out.println("Santander");
         }
         else if (colorSimilar(color, Color.parseColor("#8AC277"))) {
-            System.out.println("País Vasco");
+            System.out.println("Vitoria");
         }
         else if (colorSimilar(color, Color.parseColor("#FF9700"))) {
-            System.out.println("Navarra");
+            System.out.println("Pamplona");
         }
         else if (colorSimilar(color, Color.parseColor("#4D72FF"))) {
-            System.out.println("La Rioja");
+            System.out.println("Logroño");
         }
         else if (colorSimilar(color, Color.parseColor("#BBC19F"))) {
-            System.out.println("Aragón");
+            System.out.println("Zaragoza");
         }
         else if (colorSimilar(color, Color.parseColor("#A59794"))) {
-            System.out.println("Cataluña");
+            System.out.println("Barcelona");
         }
         else if (colorSimilar(color, Color.parseColor("#BD5858"))) {
             System.out.println("Madrid");
+        }
+        else if (colorSimilar(color, Color.parseColor("#FFD8BB"))) {
+            System.out.println("Mérida");
+        }
+        else if (colorSimilar(color, Color.parseColor("#FFF24D"))) {
+            System.out.println("Toledo");
+        }
+        else if (colorSimilar(color, Color.parseColor("#FEA98C"))) {
+            System.out.println("Valencia");
+        }
+        else if (colorSimilar(color, Color.parseColor("#669BA1"))) {
+            System.out.println("Palma de Mallorca");
+        }
+        else if (colorSimilar(color, Color.parseColor("#FF9700"))) {
+            System.out.println("Murcia");
+        }
+        else if (colorSimilar(color, Color.parseColor("#FF3A3A"))) {
+            System.out.println("Sevilla");
+        }
+        else if (colorSimilar(color, Color.parseColor("#D46CD3"))) {
+            System.out.println("Málaga");
+        }
+        else if (colorSimilar(color, Color.parseColor("#FFA6FE"))) {
+            System.out.println("Algeciras");
+        }
+        else if (colorSimilar(color, Color.parseColor("#C4EBFC"))) {
+            System.out.println("Ceuta");
+        }
+        else if (colorSimilar(color, Color.parseColor("#434343"))) {
+            System.out.println("Melilla");
+        }
+        else if (colorSimilar(color, Color.parseColor("#DFFF74"))) {
+            System.out.println("Las Palmas de Gran Canaria");
+        }
+        else if (colorSimilar(color, Color.parseColor("#728926"))) {
+            System.out.println("Santa Cruz de Tenerife");
         }
         else {
             System.out.println("No se reconoce la zona");
