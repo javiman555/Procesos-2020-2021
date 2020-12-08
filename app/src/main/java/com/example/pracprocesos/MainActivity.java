@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     //ImageView fondoinfo;
     Button botonJugar;
     ImageView botonInfo;
-    ImageView botonhelp;
+    Button botonhelp;
     TextView txtView;
 
     @Override
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         //fondoinfo = (ImageView) findViewById(R.id.fondoInfo);
         botonInfo =  (ImageView) findViewById(R.id.botonInfo);
         botonJugar = (Button) findViewById(R.id.botonjugar);
-        botonhelp = (ImageView) findViewById(R.id.botonhelp);
+        botonhelp = (Button) findViewById(R.id.botonhelp);
 
 
         ivBoton.setOnClickListener(new View.OnClickListener() {
