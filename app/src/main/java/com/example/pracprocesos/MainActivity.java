@@ -9,15 +9,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     ImageView ivBoton;
     ImageView botonAjustes;
     ImageView ajustesFondo;
+    //ImageView fondoinfo;
     Button botonJugar;
     ImageView botonInfo;
-    ImageView infofondo;
+    Button botonhelp;
+    TextView txtView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
         ivBoton = (ImageView) findViewById(R.id.ivBoton);
         botonAjustes = (ImageView) findViewById(R.id.botonAjustes);
         ajustesFondo = (ImageView) findViewById(R.id.ajustesFondo);
-        botonInfo =  (ImageView) findViewById(R.id.info);
-        //infofondo = (ImageView) findViewById(R.id.infofondo);
+        //fondoinfo = (ImageView) findViewById(R.id.fondoInfo);
+        botonInfo =  (ImageView) findViewById(R.id.botonInfo);
         botonJugar = (Button) findViewById(R.id.botonjugar);
+        botonhelp = (Button) findViewById(R.id.botonhelp);
+
 
         ivBoton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
@@ -43,25 +48,37 @@ public class MainActivity extends AppCompatActivity {
                 ajustesFondo.setVisibility(View.VISIBLE);
             }
         });
+
         ajustesFondo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ajustesFondo.setVisibility(View.INVISIBLE);
             }
         });
-        /*botonInfo.setOnClickListener(new View.OnClickListener() {
-           public void onClick(View v){
-               infofondo.setVisibility(View.VISIBLE);
-          }
+        botonInfo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                startActivity(new Intent(MainActivity.this,info_popup.class));
+            }
+        });
+        /*fondoinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fondoinfo.setVisibility(View.INVISIBLE);
+            }
         });*/
+        botonhelp.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                startActivity(new Intent(MainActivity.this,Help_popup.class));
+
+            }
+        });
         botonJugar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MapActivity.class);
-                setContentView(R.layout.activity_map);
+                Intent intent = new Intent(MainActivity.this,SelectVirusActivity.class);
+                setContentView(R.layout.activity_select_virus);
                 startActivity(intent);
                 finish();
             }
         });
-
     }
 }

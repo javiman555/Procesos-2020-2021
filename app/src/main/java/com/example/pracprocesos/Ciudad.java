@@ -13,11 +13,12 @@ public class Ciudad {
     private int muertos;
     private int totalsanitario;
     private int hospitalizados;
-    private ArrayList<String> colindantes;
-    private ArrayList<String> puertos;
-    private ArrayList<String> aeropuertos;
+    private ArrayList<String> tierra;
+    private ArrayList<String> aire;
+    private ArrayList<String> mar;
 
-    public Ciudad(String nombre, String comunidad, float v, float densidad, int poblacion, int sanos, int infectados, int totalsanitario, int hospitalizados, ArrayList<String> listaColindantes, ArrayList<String> listaPuertos, ArrayList<String> colindantes) {
+
+    public Ciudad(String nombre, String comunidad, float v, float densidad, int poblacion, int sanos, int infectados, int totalsanitario, int hospitalizados, ArrayList<String> listatierra, ArrayList<String> listaaire, ArrayList<String> listamar) {
         this.nombre = nombre;
         this.comunidad = comunidad;
         this.poblacion = poblacion;
@@ -27,9 +28,10 @@ public class Ciudad {
         this.muertos = muertos;
         this.totalsanitario = totalsanitario;
         this.hospitalizados = hospitalizados;
-        this.colindantes = colindantes;
-        this.puertos = puertos;
-        this.aeropuertos = aeropuertos;
+        this.tierra = tierra;
+        this.aire = aire;
+        this.mar = mar;
+
     }
 
     public String getNombre() {
@@ -104,27 +106,25 @@ public class Ciudad {
         this.hospitalizados = hospitalizados;
     }
 
-    public ArrayList<String> getColindantes() {
-        return colindantes;
+    public ArrayList<String> getTierra() {
+        return tierra;
     }
 
-    public void setColindantes(ArrayList<String> colindantes) {
-        this.colindantes = colindantes;
+    public void setTierra(ArrayList<String> tierra) {
+        this.tierra = tierra;
     }
 
-    public ArrayList<String> getPuertos() {
-        return puertos;
+    public ArrayList<String> getAire() { return aire; }
+
+    public void setAire(ArrayList<String> aire) { this.aire = aire; }
+
+    public ArrayList<String> getMar() {
+        return mar;
     }
 
-    public void setPuertos(ArrayList<String> puertos) {
-        this.puertos = puertos;
+    public void setMar(ArrayList<String> mar) {
+        this.mar = mar;
     }
 
-    public ArrayList<String> getAeropuertos() {
-        return aeropuertos;
-    }
 
-    public void setAeropuertos(ArrayList<String> aeropuertos) {
-        this.aeropuertos = aeropuertos;
-    }
 }
