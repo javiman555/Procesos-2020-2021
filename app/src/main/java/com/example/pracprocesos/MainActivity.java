@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView botonInfo;
     Button botonhelp;
     TextView txtView;
+    MediaPlayer mp;
+    MediaPlayer mp2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
         botonInfo =  (ImageView) findViewById(R.id.botonInfo);
         botonJugar = (Button) findViewById(R.id.botonjugar);
         botonhelp = (Button) findViewById(R.id.botonhelp);
+        mp = MediaPlayer.create(this, R.raw.sonidoboton);
+        mp2 = MediaPlayer.create(this, R.raw.sonidofondo);
 
-
+        mp2.start();
         ivBoton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 finish();
@@ -45,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         });
         botonAjustes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
+                mp.start();
                 ajustesFondo.setVisibility(View.VISIBLE);
             }
         });
@@ -57,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         });
         botonInfo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
+                mp.start();
                 startActivity(new Intent(MainActivity.this,info_popup.class));
             }
         });
@@ -68,12 +75,14 @@ public class MainActivity extends AppCompatActivity {
         });*/
         botonhelp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
+                mp.start();
                 startActivity(new Intent(MainActivity.this,Help_popup.class));
 
             }
         });
         botonJugar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                mp.start();
                 Intent intent = new Intent(MainActivity.this,SelectVirusActivity.class);
                 setContentView(R.layout.activity_select_virus);
                 startActivity(intent);
@@ -81,4 +90,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
