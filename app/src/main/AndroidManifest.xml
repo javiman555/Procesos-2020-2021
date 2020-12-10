@@ -20,6 +20,11 @@
             android:theme="@style/AppTheme.Temapopup">
         </activity>
         <activity
+            android:name=".ajustes_popup"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.Temapopup">
+        </activity>
+        <activity
             android:name=".SelectVirusActivity"
             android:screenOrientation="landscape" />
         <activity

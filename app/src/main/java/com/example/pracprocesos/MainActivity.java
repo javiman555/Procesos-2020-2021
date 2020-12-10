@@ -9,8 +9,12 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     TextView txtView;
     MediaPlayer mp;
     MediaPlayer mp2;
+    Switch Sonido;
+    ToggleButton Musica;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
         ivBoton = (ImageView) findViewById(R.id.ivBoton);
         botonAjustes = (ImageView) findViewById(R.id.botonAjustes);
-        ajustesFondo = (ImageView) findViewById(R.id.ajustesFondo);
-        //fondoinfo = (ImageView) findViewById(R.id.fondoInfo);
         botonInfo =  (ImageView) findViewById(R.id.botonInfo);
         botonJugar = (Button) findViewById(R.id.botonjugar);
         botonhelp = (Button) findViewById(R.id.botonhelp);
+        Sonido = (Switch) findViewById(R.id.sonido);
+        Musica = (ToggleButton) findViewById(R.id.musica);
         mp = MediaPlayer.create(this, R.raw.sonidoboton);
         mp2 = MediaPlayer.create(this, R.raw.sonidofondo);
 
+
+        //mp2.setLooping(true);
         mp2.start();
         ivBoton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
@@ -51,16 +59,26 @@ public class MainActivity extends AppCompatActivity {
         botonAjustes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 mp.start();
-                ajustesFondo.setVisibility(View.VISIBLE);
+                startActivity(new Intent(MainActivity.this,ajustes_popup.class));
+            }
+        });
+        Musica.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                if (Musica.isChecked()) {
+                    mp2.start();
+                } else {
+                    mp2.stop();
+                }
             }
         });
 
-        ajustesFondo.setOnClickListener(new View.OnClickListener() {
+
+        /*ajustesFondo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ajustesFondo.setVisibility(View.INVISIBLE);
             }
-        });
+        });*/
         botonInfo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 mp.start();
@@ -89,6 +107,15 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
+    /*public void onClick(View src) {
+        if(Musica.isChecked()) {
+            mp2.start();
+        }
+        else{
+            mp2.stop();
+        }
+    }*/
 }
