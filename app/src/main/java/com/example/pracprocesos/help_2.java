@@ -34,6 +34,14 @@ public class help_2 extends AppCompatActivity {
                 finish();
             }
         });
+        sig.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(help_2.this,help_3.class);
+                setContentView(R.layout.activity_help_3);
+                startActivity(intent);
+                finish();
+            }
+        });
         casa.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(help_2.this,MainActivity.class);
