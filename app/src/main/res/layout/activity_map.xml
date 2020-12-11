@@ -53,16 +53,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/acciones"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/lugar"
         android:layout_width="wrap_content"
@@ -80,12 +70,15 @@
     <Button
         android:id="@+id/botonVirus"
         android:layout_width="91dp"
-        android:layout_height="45dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="157dp"
         android:backgroundTint="#FF0000"
         android:text="Virus"
+        app:layout_constraintBottom_toTopOf="@+id/infectar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button4"
@@ -109,7 +102,7 @@
         app:layout_constraintHorizontal_bias="0.99"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lugar"
-        app:layout_constraintVertical_bias="0.032" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/infectados"
@@ -179,14 +172,16 @@
 
     <Button
         android:id="@+id/infectar"
-        android:layout_width="91dp"
-        android:layout_height="103dp"
-        android:layout_marginStart="624dp"
-        android:layout_marginTop="267dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="93dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="42dp"
+        android:backgroundTint="#1E431F"
         android:text="Infectar ciudad"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/botonVirus"
+        app:layout_constraintVertical_bias="0.86" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

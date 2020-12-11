@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     ImageView ivBoton;
     ImageView botonAjustes;
     ImageView ajustesFondo;
-    //ImageView fondoinfo;
     Button botonJugar;
     ImageView botonInfo;
     Button botonhelp;
