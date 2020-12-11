@@ -230,9 +230,9 @@ public class MapActivity extends AppCompatActivity {
                 int poblacion = Integer.parseInt(sc.nextLine());
                 int sanos = Integer.parseInt(sc.nextLine());
                 int infectados = Integer.parseInt(sc.nextLine());
-                int muertos = Integer.parseInt(sc.nextLine());
+                int muertos = 0;
                 int totalsanitario = Integer.parseInt(sc.nextLine());
-                int hospitalizados = 0;
+                int hospitalizados = Integer.parseInt(sc.nextLine());
                 String colindantes = sc.nextLine();
                 String puertos = sc.nextLine();
                 String aeropuertos = sc.nextLine();
