@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         Musica = (ToggleButton) findViewById(R.id.musica);
         mp = MediaPlayer.create(this, R.raw.sonidoboton);
         mp2 = MediaPlayer.create(this, R.raw.sonidofondo);
-        setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        initControls();
+        //setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        //initControls();
 
 
         mp2.setLooping(true);
@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         botonAjustes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 mp.start();
+                //vol.setVisibility(View.VISIBLE);
                 startActivity(new Intent(MainActivity.this,ajustes_popup.class));
 
             }
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    public void initControls()
+    /*public void initControls()
     {
         try{
             vol = (SeekBar) findViewById(R.id.volumen);
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    /*public void onPause() {
+    public void onPause() {
         mp2.stop();
         mp2.release();
         super.onPause();
