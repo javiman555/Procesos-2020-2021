@@ -6,8 +6,8 @@ public class Ciudad {
 
     private String nombre;
     private String comunidad;
-    private int poblacion;
     private float densidad;
+    private int poblacion;
     private int sanos;
     private int infectados;
     private int muertos;
@@ -18,11 +18,11 @@ public class Ciudad {
     private ArrayList<String> mar;
 
 
-    public Ciudad(String nombre, String comunidad, float v, float densidad, int poblacion, int sanos, int infectados, int totalsanitario, int hospitalizados, ArrayList<String> listatierra, ArrayList<String> listaaire, ArrayList<String> listamar) {
+    public Ciudad(String nombre, String comunidad, float densidad, int poblacion, int sanos, int infectados, int muertos, int totalsanitario, int hospitalizados, ArrayList<String> tierra, ArrayList<String> aire, ArrayList<String> mar) {
         this.nombre = nombre;
         this.comunidad = comunidad;
-        this.poblacion = poblacion;
         this.densidad = densidad;
+        this.poblacion = poblacion;
         this.sanos = sanos;
         this.infectados = infectados;
         this.muertos = muertos;
@@ -70,24 +70,24 @@ public class Ciudad {
         return sanos;
     }
 
-    public void setSanos(int sanos) {
-        this.sanos = sanos;
+    public void sumSanos(int sanos) {
+        this.sanos += sanos;
     }
 
     public int getInfectados() {
         return infectados;
     }
 
-    public void setInfectados(int infectados) {
-        this.infectados = infectados;
+    public void sumInfectados(int infectados) {
+        this.infectados += infectados;
     }
 
     public int getMuertos() {
         return muertos;
     }
 
-    public void setMuertos(int muertos) {
-        this.muertos = muertos;
+    public void sumMuertos(int muertos) {
+        this.muertos += muertos;
     }
 
     public int getTotalsanitario() {

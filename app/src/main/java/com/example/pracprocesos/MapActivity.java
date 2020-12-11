@@ -3,7 +3,6 @@ package com.example.pracprocesos;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -14,11 +13,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+
 public class MapActivity extends AppCompatActivity {
 
     TextView lugar,sanos, infectados,muertos;
-    Button botonVirus;
+    Button botonVirus, botonInfectar;
     ImageView imagen_mapa, mapa_zonas;
+    HashMap<String, Ciudad> grafo = new HashMap<>();
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -27,14 +34,16 @@ public class MapActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_map);
 
-        Virus  virus = (Virus) getIntent().getSerializableExtra("virus");
+        Virus virus = (Virus) getIntent().getSerializableExtra("virus");
         botonVirus = (Button) findViewById(R.id.botonVirus);
         botonVirus.setText(virus.getNombre());
         mostrarVirus(virus);
 
+        grafo = InputData("newGameData.txt");
+
         botonVirus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            mostrarVirus(virus);
+                mostrarVirus(virus);
             }
         });
 
@@ -53,18 +62,40 @@ public class MapActivity extends AppCompatActivity {
             }
         });
 
+        botonInfectar = (Button) findViewById(R.id.infectar);
+
+        botonInfectar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lugar = (TextView) findViewById(R.id.lugar);
+                String ciudad = (String) lugar.getText();
+                if (grafo.get(ciudad) != null){
+                    grafo.get(ciudad).sumSanos(-1);
+                    grafo.get(ciudad).sumInfectados(1);
+                    botonInfectar.setEnabled(false);
+                    botonInfectar.setVisibility(View.INVISIBLE);
+                    cambiarDatosLateral(ciudad,
+                            grafo.get(ciudad).getSanos(),
+                            grafo.get(ciudad).getInfectados(),
+                            grafo.get(ciudad).getMuertos());
+                }
+            }
+        });
+    }
+
+    public void cambiarDatosLateral(String sLugar, int numSanos, int numInfectados, int numMuertos){
+        lugar = (TextView) findViewById(R.id.lugar);
+        lugar.setText(sLugar);
+        sanos = (TextView) findViewById(R.id.sanos);
+        sanos.setText(Integer.toString(numSanos));
+        infectados = (TextView) findViewById(R.id.infectados);
+        infectados.setText(Integer.toString(numInfectados));
+        muertos = (TextView) findViewById(R.id.muertos);
+        muertos.setText(Integer.toString(numMuertos));
     }
 
     public void mostrarVirus(Virus virus){
-        lugar = (TextView) findViewById(R.id.lugar);
-        lugar.setText("España");
-        sanos = (TextView) findViewById(R.id.sanos);
-        sanos.setText(Integer.toString(virus.getSanos()));
-        infectados = (TextView) findViewById(R.id.infectados);
-        infectados.setText(Integer.toString(virus.getInfectados()));
-        muertos = (TextView) findViewById(R.id.muertos);
-        muertos.setText(Integer.toString(virus.getMuertos()));
-
+        cambiarDatosLateral("España", virus.getSanos(), virus.getInfectados(), virus.getMuertos());
     }
 
     /* Zona para interactividad del mapa */
@@ -77,76 +108,88 @@ public class MapActivity extends AppCompatActivity {
     public void clickMapa(int coord_x, int coord_y) {
 
         int color = colorDePunto(coord_x,coord_y);
+        String sitio = null;
 
         if (colorSimilar(color, Color.parseColor("#A24FFF"))) {
-            System.out.println("Valladolid");
+            sitio = "Valladolid";
         }
         else if (colorSimilar(color, Color.parseColor("#FFCB7F"))) {
-            System.out.println("Santiago de Compostela");
+            sitio = "Santiago de Compostela";
         }
         else if (colorSimilar(color, Color.parseColor("#D2A9CB"))) {
-            System.out.println("Oviedo");
+            sitio = "Oviedo";
         }
         else if (colorSimilar(color, Color.parseColor("#F07995"))) {
-            System.out.println("Santander");
+            sitio = "Santander";
         }
         else if (colorSimilar(color, Color.parseColor("#8AC277"))) {
-            System.out.println("Vitoria");
+            sitio = "Vitoria";
         }
         else if (colorSimilar(color, Color.parseColor("#FF9700"))) {
-            System.out.println("Pamplona");
+            sitio = "Pamplona";
         }
         else if (colorSimilar(color, Color.parseColor("#4D72FF"))) {
-            System.out.println("Logroño");
+            sitio = "Logroño";
         }
         else if (colorSimilar(color, Color.parseColor("#BBC19F"))) {
-            System.out.println("Zaragoza");
+            sitio = "Zaragoza";
         }
         else if (colorSimilar(color, Color.parseColor("#A59794"))) {
-            System.out.println("Barcelona");
+            sitio = "Barcelona";
         }
         else if (colorSimilar(color, Color.parseColor("#BD5858"))) {
-            System.out.println("Madrid");
+            sitio = "Madrid";
         }
         else if (colorSimilar(color, Color.parseColor("#FFD8BB"))) {
-            System.out.println("Mérida");
+            sitio = "Mérida";
         }
         else if (colorSimilar(color, Color.parseColor("#FFF24D"))) {
-            System.out.println("Toledo");
+            sitio = "Toledo";
         }
         else if (colorSimilar(color, Color.parseColor("#FEA98C"))) {
-            System.out.println("Valencia");
+            sitio = "Valencia";
         }
         else if (colorSimilar(color, Color.parseColor("#669BA1"))) {
-            System.out.println("Palma de Mallorca");
+            sitio = "Palma de Mallorca";
         }
         else if (colorSimilar(color, Color.parseColor("#009D78"))) {
-            System.out.println("Murcia");
+            sitio = "Murcia";
         }
         else if (colorSimilar(color, Color.parseColor("#FF3A3A"))) {
-            System.out.println("Sevilla");
+            sitio = "Sevilla";
         }
         else if (colorSimilar(color, Color.parseColor("#D46CD3"))) {
-            System.out.println("Málaga");
+            sitio = "Málaga";
         }
         else if (colorSimilar(color, Color.parseColor("#FFA6FE"))) {
-            System.out.println("Algeciras");
+            sitio = "Algeciras";
         }
         else if (colorSimilar(color, Color.parseColor("#D5D5D5"))) {
-            System.out.println("Ceuta");
+            sitio = "Ceuta";
         }
         else if (colorSimilar(color, Color.parseColor("#434343"))) {
-            System.out.println("Melilla");
+            sitio = "Melilla";
         }
         else if (colorSimilar(color, Color.parseColor("#DFFF74"))) {
-            System.out.println("Las Palmas de Gran Canaria");
+            sitio = "Las Palmas de Gran Canaria";
         }
         else if (colorSimilar(color, Color.parseColor("#728926"))) {
-            System.out.println("Santa Cruz de Tenerife");
+            sitio = "Santa Cruz de Tenerife";
         }
         else {
-            System.out.println("No se reconoce la zona");
+            sitio = "No se reconoce la zona";
         }
+        System.out.println(sitio);
+        if (grafo.get(sitio) != null){
+        System.out.println("Sanos: " + grafo.get(sitio).getSanos());
+        System.out.println("Infectados: " + grafo.get(sitio).getInfectados());
+        System.out.println("Muertos: " + grafo.get(sitio).getMuertos());
+            cambiarDatosLateral(sitio,
+                    grafo.get(sitio).getSanos(),
+                    grafo.get(sitio).getInfectados(),
+                    grafo.get(sitio).getMuertos());
+        } else cambiarDatosLateral(sitio, 0, 0,0);
+
     }
 
     public int colorDePunto(int x, int y) {
@@ -167,6 +210,66 @@ public class MapActivity extends AppCompatActivity {
         return true;
     }
 
+    // CARGAR DATOS
+    public HashMap<String, Ciudad> InputData(String archivo) {
+        HashMap<String, Ciudad> mapa = new HashMap<>();
+        try {
+            InputStream is = getAssets().open(archivo);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            String allData = new String(buffer, StandardCharsets.UTF_8);
+            //System.out.println(allData);
+            Scanner sc = new Scanner(allData);
+
+            while (sc.hasNextLine()) {
+                String nombre = sc.nextLine();
+                String comunidad = sc.nextLine();
+                float densidad = Float.parseFloat(sc.nextLine());
+                int poblacion = Integer.parseInt(sc.nextLine());
+                int sanos = Integer.parseInt(sc.nextLine());
+                int infectados = Integer.parseInt(sc.nextLine());
+                int muertos = Integer.parseInt(sc.nextLine());
+                int totalsanitario = Integer.parseInt(sc.nextLine());
+                int hospitalizados = 0;
+                String colindantes = sc.nextLine();
+                String puertos = sc.nextLine();
+                String aeropuertos = sc.nextLine();
+
+                ArrayList<String> listaColindantes = stringToList(colindantes);
+                ArrayList<String> listaPuertos = stringToList(puertos);
+                ArrayList<String> listaAeropuertos = stringToList(aeropuertos);
+
+                Ciudad ciu = new Ciudad(nombre,
+                        comunidad,
+                        densidad,
+                        poblacion,
+                        sanos,
+                        infectados,
+                        muertos,
+                        totalsanitario,
+                        hospitalizados,
+                        listaColindantes,
+                        listaPuertos,
+                        listaAeropuertos);
+                mapa.put(nombre, ciu);
+            }
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return mapa;
+    }
+
+
+    public ArrayList<String> stringToList(String s){
+        ArrayList<String> lista = new ArrayList<String>();
+        String[] array = s.split(", ");
+        for (int i = 0; i < array.length; i++){
+            lista.add(array[i]);
+        }
+        return lista;
+    }
 
 
 }
