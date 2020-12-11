@@ -175,7 +175,7 @@
         android:layout_width="93dp"
         android:layout_height="68dp"
         android:layout_marginBottom="42dp"
-        android:backgroundTint="#1E431F"
+        android:backgroundTint="#439745"
         android:text="Infectar ciudad"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
