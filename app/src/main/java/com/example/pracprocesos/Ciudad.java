@@ -6,7 +6,7 @@ public class Ciudad {
 
     private String nombre;
     private String comunidad;
-    private float densidad;
+    private float superficie; //en km2
     private int poblacion;
     private int sanos;
     private int infectados;
@@ -18,10 +18,10 @@ public class Ciudad {
     private ArrayList<String> mar;
 
 
-    public Ciudad(String nombre, String comunidad, float densidad, int poblacion, int sanos, int infectados, int muertos, int totalsanitario, int hospitalizados, ArrayList<String> tierra, ArrayList<String> aire, ArrayList<String> mar) {
+    public Ciudad(String nombre, String comunidad, float superficie, int poblacion, int sanos, int infectados, int muertos, int totalsanitario, int hospitalizados, ArrayList<String> tierra, ArrayList<String> aire, ArrayList<String> mar) {
         this.nombre = nombre;
         this.comunidad = comunidad;
-        this.densidad = densidad;
+        this.superficie = superficie;
         this.poblacion = poblacion;
         this.sanos = sanos;
         this.infectados = infectados;
@@ -54,16 +54,16 @@ public class Ciudad {
         return poblacion;
     }
 
-    public void setPoblacion(int poblacion) {
-        this.poblacion = poblacion;
+    public void sumPoblacion(int poblacion) {
+        this.poblacion += poblacion;
     }
 
-    public float getDensidad() {
-        return densidad;
+    public float getSuperficie() {
+        return superficie;
     }
 
-    public void setDensidad(int densidad) {
-        this.densidad = densidad;
+    public void setSuperficie(int superficie) {
+        this.superficie = superficie;
     }
 
     public int getSanos() {

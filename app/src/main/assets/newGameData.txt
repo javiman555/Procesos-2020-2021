@@ -1,6 +1,6 @@
 Sevilla
 Andalucía
-4896.55
+140.8
 688592
 688592
 0
@@ -11,7 +11,7 @@ Mérida, Madrid, Murcia, Algeciras, Málaga
 
 Zaragoza
 Aragón
-682.84
+988.51
 674997
 674997
 0
@@ -22,7 +22,7 @@ Barcelona, Valencia, Madrid, Logroño, Pamplona
 
 Oviedo
 Asturias
-1180.29
+186.73
 220406
 220406
 0
@@ -33,7 +33,7 @@ Madrid
 
 Palma de Mallorca
 Islas Baleares
-1948.39
+213.54
 416065
 416065
 0
@@ -44,7 +44,7 @@ Madrid, Barcelona, Málaga, Santa Cruz de Tenerife, Las Palmas de Gran Canaria
 Valencia, Barcelona
 Santa Cruz de Tenerife
 Canarias
-1376.94
+150.5
 207312
 207312
 0
@@ -55,7 +55,7 @@ Madrid, Barcelona, Palma de Mallorca, Málaga
 Las Palmas de Gran Canaria
 Las Palmas de Gran Canaria
 Canarias
-3755.84
+101.16
 379925
 379925
 0
@@ -66,7 +66,7 @@ Madrid, Barcelona, Palma de Mallorca, Málaga
 Santa Cruz de Tenerife
 Santander
 Cantabria
-4765.83
+36.2
 172539
 172539
 0
@@ -77,7 +77,7 @@ Oviedo, Vitoria, Valladolid
 
 Toledo
 Castilla-La Mancha
-360.8
+235.76
 84873
 84873
 0
@@ -88,7 +88,7 @@ Madrid, Mérida
 
 Valladolid
 Castilla y León
-1514.4
+197.05
 298412
 298412
 0
@@ -99,7 +99,7 @@ Santiago de Compostela, Oviedo, Santander, Vitoria, Logroño, Mérida, Madrid
 
 Barcelona
 Cataluña
-15992.2
+101.35
 1636762
 1636762
 0
@@ -110,7 +110,7 @@ Madrid, Palma de Mallorca, Málaga, Santa Cruz de Tenerife, Las Palmas de Gran C
 Palma de Mallorca
 Ceuta
 Ceuta
-4582.54
+18.5
 85209
 85209
 0
@@ -121,7 +121,7 @@ Ceuta
 Algeciras
 Mérida
 Extremadura
-68.41
+865.19
 59335
 59335
 0
@@ -132,7 +132,7 @@ Valladolid, Santiago de Compostela, Madrid, Toledo, Sevilla
 
 Santiago de Compostela
 Galicia
-438.42
+221.84
 97260
 97260
 0
@@ -143,7 +143,7 @@ Madrid
 
 Logroño
 La Rioja
-1897.91
+79.55
 151136
 151136
 0
@@ -154,7 +154,7 @@ Vitoria, Pamplona, Zaragoza, Valladolid, Madrid
 
 Madrid
 Comunidad de Madrid
-5265.91
+604.45
 3266126
 3266126
 0
@@ -165,7 +165,7 @@ Barcelona, Palma de Mallorca, Málaga, Santa Cruz de Tenerife, Las Palmas de Gra
 
 Melilla
 Melilla
-7009.81
+12.3
 84708
 84708
 0
@@ -176,7 +176,7 @@ Melilla
 Málaga
 Murcia
 Región de Murcia
-513.98
+881.86
 453258
 453258
 0
@@ -187,7 +187,7 @@ Sevilla, Madrid, Valencia, Málaga
 
 Pamplona
 Navarra
-7841.61
+25.14
 201653
 201653
 0
@@ -198,7 +198,7 @@ Vitoria, Logroño, Zaragoza
 
 Valencia
 Comunidad Valenciana
-5850.78
+134.65
 794288
 794288
 0
@@ -209,7 +209,7 @@ Barcelona, Madrid, Murcia, Zaragoza
 Palma de Mallorca
 Vitoria
 Pais Vasco
-894.58
+276.08
 251774
 251774
 0
@@ -220,7 +220,7 @@ Logroño, Valladolid, Santander, Pamplona, Madrid
 
 Málaga
 Andalucía
-1428.76
+398.25
 574654
 574654
 0
@@ -231,7 +231,7 @@ Madrid, Barcelona, Palma de Mallorca, Santa Cruz de Tenerife, Las Palmas de Gran
 Melilla
 Algeciras
 Andalucía
-1410.16
+85.9
 121957
 121957
 0

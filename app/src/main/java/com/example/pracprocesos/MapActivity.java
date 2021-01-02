@@ -13,12 +13,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+
+import static java.lang.Math.random;
 
 public class MapActivity extends AppCompatActivity {
 
@@ -210,7 +212,10 @@ public class MapActivity extends AppCompatActivity {
         return true;
     }
 
-    // CARGAR DATOS
+    /***************
+     * CARGAR DATOS
+     */
+
     public HashMap<String, Ciudad> InputData(String archivo) {
         HashMap<String, Ciudad> mapa = new HashMap<>();
         try {
@@ -261,7 +266,6 @@ public class MapActivity extends AppCompatActivity {
         return mapa;
     }
 
-
     public ArrayList<String> stringToList(String s){
         ArrayList<String> lista = new ArrayList<String>();
         String[] array = s.split(", ");
@@ -271,5 +275,123 @@ public class MapActivity extends AppCompatActivity {
         return lista;
     }
 
+    /***********************
+     * ECUACIONES DEL VIRUS Y DE LOS VIAJES (Y SUS MÉTODOS)
+     */
+    Random rand = new Random();
+    float d_min = Float.MAX_VALUE;
+    HashMap<String, Ciudad> propagacion(@NotNull HashMap<String, Ciudad> grafo, String nomCiudad){ //Devuelve el grafo
+        Ciudad ciudad = grafo.remove(nomCiudad);
+        int old_inf = ciudad.getInfectados();
+        float densidad = ciudad.getPoblacion()/ciudad.getSuperficie();
+        d_min = Math.min(densidad, d_min);
+        float deathline = 1.0f;
+        if (ciudad.getInfectados() > ciudad.getHospitalizados()) deathline = 1.5f;
+        int infNuevos = (int) Math.round(Math.pow((2*Math.log(densidad) - 2*Math.log(Math.max(100, d_min)) + 1) * old_inf, deathline));
+        int muertos = (int) Math.pow((old_inf * Math.abs(rand.nextGaussian())), deathline);
+        int infTotales = infNuevos - muertos;
+        ciudad.sumInfectados(infTotales - old_inf);
+        ciudad.sumSanos(old_inf - infNuevos);
+        ciudad.sumMuertos(muertos);
+        ciudad.sumPoblacion(-muertos);
+        grafo.put(nomCiudad, ciudad);
+        return grafo;
+    }
+
+    HashMap<String, Ciudad> viajes(@NotNull HashMap<String, Ciudad> grafo, String nomOrigen){
+        Ciudad origen = grafo.remove(nomOrigen);
+        int poblacion = origen.getPoblacion();
+        int viajaTierra = (int) Math.round(Math.random() * 0.035 * poblacion);
+        int viajaMar = (int) Math.round(Math.random() * 0.003 * poblacion);
+        int viajaAire = (int) Math.round(Math.random() * 0.012 * poblacion);
+
+        float sigmaInf = origen.getInfectados()/origen.getSanos();
+        int infTierra = (int) Math.round(sigmaInf * viajaTierra);
+        int infMar = (int) Math.round(sigmaInf * viajaMar);
+        int infAire = (int) Math.round(sigmaInf * viajaAire);
+
+        int infAcumulado = 0, sanAcumulado = 0;
+        int nTierra = origen.getTierra().size();
+        int nMar = origen.getMar().size();
+        int nAire = origen.getAire().size();
+
+        for (int i = 0; i < nTierra - 1; i++){
+            String nomDestino = origen.getTierra().get(i);
+            Ciudad destino = grafo.remove(nomDestino);
+            int viajaInfectados = (int) Math.round(infTierra / nTierra);
+            int viajaSanos = (int) Math.round(viajaTierra / nTierra) - viajaInfectados;
+            infAcumulado += viajaInfectados;
+            sanAcumulado += viajaSanos;
+            origen.sumSanos(-viajaSanos);
+            origen.sumInfectados(-viajaInfectados);
+            origen.sumPoblacion(-viajaSanos - viajaInfectados);
+            destino.sumSanos(viajaSanos);
+            destino.sumInfectados(viajaInfectados);
+            destino.sumPoblacion(viajaSanos + viajaInfectados);
+            grafo.put(nomDestino, destino);
+        };
+        String nomDestino = origen.getTierra().get(nTierra-1);
+        Ciudad destino = grafo.remove(nomDestino);
+        int viajaInfectados = infTierra - infAcumulado;
+        int viajaSanos = viajaTierra - infTierra - sanAcumulado;
+        origen.sumSanos(-viajaSanos);
+        origen.sumInfectados(-viajaInfectados);
+        destino.sumSanos(viajaSanos);
+        destino.sumInfectados(viajaInfectados);
+        grafo.put(nomDestino, destino);
+
+        for (int i = 0; i < nTierra - 1; i++){
+            String nomDestino = origen.getTierra().get(i);
+            Ciudad destino = grafo.remove(nomDestino);
+            int viajaInfectados = (int) Math.round(infTierra / nTierra);
+            int viajaSanos = (int) Math.round(viajaTierra / nTierra) - viajaInfectados;
+            infAcumulado += viajaInfectados;
+            sanAcumulado += viajaSanos;
+            origen.sumSanos(-viajaSanos);
+            origen.sumInfectados(-viajaInfectados);
+            origen.sumPoblacion(-viajaSanos - viajaInfectados);
+            destino.sumSanos(viajaSanos);
+            destino.sumInfectados(viajaInfectados);
+            destino.sumPoblacion(viajaSanos + viajaInfectados);
+            grafo.put(nomDestino, destino);
+        };
+        String nomDestino = origen.getTierra().get(nTierra-1);
+        Ciudad destino = grafo.remove(nomDestino);
+        int viajaInfectados = infTierra - infAcumulado;
+        int viajaSanos = viajaTierra - infTierra - sanAcumulado;
+        origen.sumSanos(-viajaSanos);
+        origen.sumInfectados(-viajaInfectados);
+        destino.sumSanos(viajaSanos);
+        destino.sumInfectados(viajaInfectados);
+        grafo.put(nomDestino, destino);
+
+        for (int i = 0; i < nTierra - 1; i++){
+            String nomDestino = origen.getTierra().get(i);
+            Ciudad destino = grafo.remove(nomDestino);
+            int viajaInfectados = (int) Math.round(infTierra / nTierra);
+            int viajaSanos = (int) Math.round(viajaTierra / nTierra) - viajaInfectados;
+            infAcumulado += viajaInfectados;
+            sanAcumulado += viajaSanos;
+            origen.sumSanos(-viajaSanos);
+            origen.sumInfectados(-viajaInfectados);
+            origen.sumPoblacion(-viajaSanos - viajaInfectados);
+            destino.sumSanos(viajaSanos);
+            destino.sumInfectados(viajaInfectados);
+            destino.sumPoblacion(viajaSanos + viajaInfectados);
+            grafo.put(nomDestino, destino);
+        };
+        String nomDestino = origen.getTierra().get(nTierra-1);
+        Ciudad destino = grafo.remove(nomDestino);
+        int viajaInfectados = infTierra - infAcumulado;
+        int viajaSanos = viajaTierra - infTierra - sanAcumulado;
+        origen.sumSanos(-viajaSanos);
+        origen.sumInfectados(-viajaInfectados);
+        destino.sumSanos(viajaSanos);
+        destino.sumInfectados(viajaInfectados);
+        grafo.put(nomDestino, destino);
+
+        grafo.put(nomOrigen, origen);
+
+    }
 
 }
