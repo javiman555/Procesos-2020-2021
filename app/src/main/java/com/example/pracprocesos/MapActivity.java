@@ -314,12 +314,14 @@ public class MapActivity extends AppCompatActivity {
         int nTierra = origen.getTierra().size();
         int nMar = origen.getMar().size();
         int nAire = origen.getAire().size();
-
+        String nomDestino = null;
+        Ciudad destino = null;
+        int viajaInfectados = 0, viajaSanos = 0;
         for (int i = 0; i < nTierra - 1; i++){
-            String nomDestino = origen.getTierra().get(i);
-            Ciudad destino = grafo.remove(nomDestino);
-            int viajaInfectados = (int) Math.round(infTierra / nTierra);
-            int viajaSanos = (int) Math.round(viajaTierra / nTierra) - viajaInfectados;
+            nomDestino = origen.getTierra().get(i);
+            destino = grafo.remove(nomDestino);
+            viajaInfectados = (int) Math.round(infTierra / nTierra);
+            viajaSanos = (int) Math.round(viajaTierra / nTierra) - viajaInfectados;
             infAcumulado += viajaInfectados;
             sanAcumulado += viajaSanos;
             origen.sumSanos(-viajaSanos);
@@ -330,21 +332,21 @@ public class MapActivity extends AppCompatActivity {
             destino.sumPoblacion(viajaSanos + viajaInfectados);
             grafo.put(nomDestino, destino);
         };
-        String nomDestino = origen.getTierra().get(nTierra-1);
-        Ciudad destino = grafo.remove(nomDestino);
-        int viajaInfectados = infTierra - infAcumulado;
-        int viajaSanos = viajaTierra - infTierra - sanAcumulado;
+        nomDestino = origen.getTierra().get(nTierra-1);
+        destino = grafo.remove(nomDestino);
+        viajaInfectados = infTierra - infAcumulado;
+        viajaSanos = viajaTierra - infTierra - sanAcumulado;
         origen.sumSanos(-viajaSanos);
         origen.sumInfectados(-viajaInfectados);
         destino.sumSanos(viajaSanos);
         destino.sumInfectados(viajaInfectados);
         grafo.put(nomDestino, destino);
 
-        for (int i = 0; i < nTierra - 1; i++){
-            String nomDestino = origen.getTierra().get(i);
-            Ciudad destino = grafo.remove(nomDestino);
-            int viajaInfectados = (int) Math.round(infTierra / nTierra);
-            int viajaSanos = (int) Math.round(viajaTierra / nTierra) - viajaInfectados;
+        for (int i = 0; i < nAire - 1; i++){
+            nomDestino = origen.getAire().get(i);
+            destino = grafo.remove(nomDestino);
+            viajaInfectados = (int) Math.round(infAire / nAire);
+            viajaSanos = (int) Math.round(viajaAire / nAire) - viajaInfectados;
             infAcumulado += viajaInfectados;
             sanAcumulado += viajaSanos;
             origen.sumSanos(-viajaSanos);
@@ -355,21 +357,21 @@ public class MapActivity extends AppCompatActivity {
             destino.sumPoblacion(viajaSanos + viajaInfectados);
             grafo.put(nomDestino, destino);
         };
-        String nomDestino = origen.getTierra().get(nTierra-1);
-        Ciudad destino = grafo.remove(nomDestino);
-        int viajaInfectados = infTierra - infAcumulado;
-        int viajaSanos = viajaTierra - infTierra - sanAcumulado;
+        nomDestino = origen.getAire().get(nAire-1);
+        destino = grafo.remove(nomDestino);
+        viajaInfectados = infAire - infAcumulado;
+        viajaSanos = viajaAire - infAire - sanAcumulado;
         origen.sumSanos(-viajaSanos);
         origen.sumInfectados(-viajaInfectados);
         destino.sumSanos(viajaSanos);
         destino.sumInfectados(viajaInfectados);
         grafo.put(nomDestino, destino);
 
-        for (int i = 0; i < nTierra - 1; i++){
-            String nomDestino = origen.getTierra().get(i);
-            Ciudad destino = grafo.remove(nomDestino);
-            int viajaInfectados = (int) Math.round(infTierra / nTierra);
-            int viajaSanos = (int) Math.round(viajaTierra / nTierra) - viajaInfectados;
+        for (int i = 0; i < nMar - 1; i++){
+            nomDestino = origen.getMar().get(i);
+            destino = grafo.remove(nomDestino);
+            viajaInfectados = (int) Math.round(infMar / nMar);
+            viajaSanos = (int) Math.round(viajaMar / nMar) - viajaInfectados;
             infAcumulado += viajaInfectados;
             sanAcumulado += viajaSanos;
             origen.sumSanos(-viajaSanos);
@@ -380,10 +382,10 @@ public class MapActivity extends AppCompatActivity {
             destino.sumPoblacion(viajaSanos + viajaInfectados);
             grafo.put(nomDestino, destino);
         };
-        String nomDestino = origen.getTierra().get(nTierra-1);
-        Ciudad destino = grafo.remove(nomDestino);
-        int viajaInfectados = infTierra - infAcumulado;
-        int viajaSanos = viajaTierra - infTierra - sanAcumulado;
+        nomDestino = origen.getMar().get(nMar-1);
+        destino = grafo.remove(nomDestino);
+        viajaInfectados = infMar - infAcumulado;
+        viajaSanos = viajaMar - infMar - sanAcumulado;
         origen.sumSanos(-viajaSanos);
         origen.sumInfectados(-viajaInfectados);
         destino.sumSanos(viajaSanos);
@@ -391,7 +393,6 @@ public class MapActivity extends AppCompatActivity {
         grafo.put(nomDestino, destino);
 
         grafo.put(nomOrigen, origen);
-
     }
 
 }
