@@ -393,6 +393,7 @@ public class MapActivity extends AppCompatActivity {
         grafo.put(nomDestino, destino);
 
         grafo.put(nomOrigen, origen);
+        return grafo;
     }
 
 }
