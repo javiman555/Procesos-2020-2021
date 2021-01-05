@@ -1,11 +1,13 @@
 package com.example.pracprocesos;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,7 +15,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,10 +25,12 @@ import static java.lang.Math.random;
 
 public class MapActivity extends AppCompatActivity {
 
-    TextView lugar,sanos, infectados,muertos;
+    TextView lugar, sanos, infectados, muertos, textTurno;
     Button botonVirus, botonInfectar;
     ImageView imagen_mapa, mapa_zonas;
     HashMap<String, Ciudad> grafo = new HashMap<>();
+    int turno = -1;
+    Set<String> infectadas = new HashSet<String>();
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -36,6 +39,7 @@ public class MapActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_map);
 
+        TextView textTurno = (TextView) findViewById(R.id.textView_turno);
         Virus virus = (Virus) getIntent().getSerializableExtra("virus");
         botonVirus = (Button) findViewById(R.id.botonVirus);
         botonVirus.setText(virus.getNombre());
@@ -72,14 +76,26 @@ public class MapActivity extends AppCompatActivity {
                 lugar = (TextView) findViewById(R.id.lugar);
                 String ciudad = (String) lugar.getText();
                 if (grafo.get(ciudad) != null){
-                    grafo.get(ciudad).sumSanos(-1);
-                    grafo.get(ciudad).sumInfectados(1);
-                    botonInfectar.setEnabled(false);
-                    botonInfectar.setVisibility(View.INVISIBLE);
+
+                    if (turno > -1) {
+                        double porcInf = (grafo.get(ciudad).getInfectados() / grafo.get(ciudad).getSanos()) * 100;
+                        grafo = propagacion(grafo,ciudad);
+                        grafo = viajes(grafo);
+                    }
+                    else {
+                        grafo.get(ciudad).sumSanos(-1000);
+                        grafo.get(ciudad).sumInfectados(1000);
+                        botonInfectar.setText("Siguiente turno");
+                        infectadas.add(ciudad);
+                    }
+
+                    turno++;
                     cambiarDatosLateral(ciudad,
                             grafo.get(ciudad).getSanos(),
                             grafo.get(ciudad).getInfectados(),
                             grafo.get(ciudad).getMuertos());
+                    String aux = "Turno " + turno;
+                    textTurno.setText(aux);
                 }
             }
         });
@@ -270,7 +286,9 @@ public class MapActivity extends AppCompatActivity {
         ArrayList<String> lista = new ArrayList<String>();
         String[] array = s.split(", ");
         for (int i = 0; i < array.length; i++){
-            lista.add(array[i]);
+            if (!array[i].equals("")) {
+                lista.add(array[i]);
+            }
         }
         return lista;
     }
@@ -280,15 +298,16 @@ public class MapActivity extends AppCompatActivity {
      */
     Random rand = new Random();
     float d_min = Float.MAX_VALUE;
-    HashMap<String, Ciudad> propagacion(@NotNull HashMap<String, Ciudad> grafo, String nomCiudad){ //Devuelve el grafo
+    HashMap<String, Ciudad> propagacion(HashMap<String, Ciudad> grafo, String nomCiudad){ //Devuelve el grafo
         Ciudad ciudad = grafo.remove(nomCiudad);
         int old_inf = ciudad.getInfectados();
         float densidad = ciudad.getPoblacion()/ciudad.getSuperficie();
         d_min = Math.min(densidad, d_min);
-        float deathline = 1.0f;
+        float deathline = 1f;
         if (ciudad.getInfectados() > ciudad.getHospitalizados()) deathline = 1.5f;
         int infNuevos = (int) Math.round(Math.pow((2*Math.log(densidad) - 2*Math.log(Math.max(100, d_min)) + 1) * old_inf, deathline));
-        int muertos = (int) Math.pow((old_inf * Math.abs(rand.nextGaussian())), deathline);
+        //int muertos = (int) Math.pow((old_inf * Math.abs(rand.nextGaussian())), deathline);
+        int muertos = 0;
         int infTotales = infNuevos - muertos;
         ciudad.sumInfectados(infTotales - old_inf);
         ciudad.sumSanos(old_inf - infNuevos);
@@ -298,7 +317,57 @@ public class MapActivity extends AppCompatActivity {
         return grafo;
     }
 
-    HashMap<String, Ciudad> viajes(@NotNull HashMap<String, Ciudad> grafo, String nomOrigen){
+    HashMap<String, Ciudad> viajes(HashMap<String, Ciudad> grafo){
+        Set<String> infec_antiguos = new HashSet<>(infectadas);
+
+        for (String c : infec_antiguos) {
+            Ciudad origen = grafo.get(c);
+            int infectados = origen.getInfectados();
+            int viajaTierra = (int) Math.round(0.035 * infectados);
+            int viajaMar = (int) Math.round(0.003 * infectados);
+            int viajaAire = (int) Math.round(0.012 * infectados);
+            ArrayList<String> conexiones_tierra = origen.getTierra();
+            ArrayList<String> conexiones_mar = origen.getMar();
+            ArrayList<String> conexiones_aire = origen.getAire();
+            if (!conexiones_tierra.isEmpty()) {
+                for (String t : conexiones_tierra) {
+                    if (!infec_antiguos.contains(t)) {
+                        Ciudad destino = grafo.get(t);
+                        int sanos_destino = destino.getSanos();
+                        destino.sumInfectados(viajaTierra);
+                        destino.sumSanos(-viajaTierra);
+                        infectadas.add(t);
+                    }
+                }
+            }
+            if (!conexiones_aire.isEmpty()) {
+                for (String a : conexiones_aire) {
+                    if (!infec_antiguos.contains(a)) {
+                        Ciudad destino = grafo.get(a);
+                        int sanos_destino = destino.getSanos();
+                        destino.sumInfectados(viajaAire);
+                        destino.sumSanos(-viajaAire);
+                        infectadas.add(a);
+                    }
+                }
+            }
+            if (!conexiones_mar.isEmpty()) {
+                for (String m : conexiones_mar) {
+                    if (!infec_antiguos.contains(m)) {
+                        Ciudad destino = grafo.get(m);
+                        int sanos_destino = destino.getSanos();
+                        destino.sumInfectados(viajaMar);
+                        destino.sumSanos(-viajaMar);
+                        infectadas.add(m);
+                    }
+                }
+            }
+        }
+
+        return grafo;
+    }
+
+    /*HashMap<String, Ciudad> viajes(@NotNull HashMap<String, Ciudad> grafo, String nomOrigen){
         Ciudad origen = grafo.remove(nomOrigen);
         int poblacion = origen.getPoblacion();
         int viajaTierra = (int) Math.round(Math.random() * 0.035 * poblacion);
@@ -334,13 +403,15 @@ public class MapActivity extends AppCompatActivity {
         };
         nomDestino = origen.getTierra().get(nTierra-1);
         destino = grafo.remove(nomDestino);
-        viajaInfectados = infTierra - infAcumulado;
-        viajaSanos = viajaTierra - infTierra - sanAcumulado;
-        origen.sumSanos(-viajaSanos);
-        origen.sumInfectados(-viajaInfectados);
-        destino.sumSanos(viajaSanos);
-        destino.sumInfectados(viajaInfectados);
-        grafo.put(nomDestino, destino);
+        if (Objects.nonNull(destino)) {
+            viajaInfectados = infTierra - infAcumulado;
+            viajaSanos = viajaTierra - infTierra - sanAcumulado;
+            origen.sumSanos(-viajaSanos);
+            origen.sumInfectados(-viajaInfectados);
+            destino.sumSanos(viajaSanos);
+            destino.sumInfectados(viajaInfectados);
+            grafo.put(nomDestino, destino);
+        }
 
         for (int i = 0; i < nAire - 1; i++){
             nomDestino = origen.getAire().get(i);
@@ -359,14 +430,15 @@ public class MapActivity extends AppCompatActivity {
         };
         nomDestino = origen.getAire().get(nAire-1);
         destino = grafo.remove(nomDestino);
-        viajaInfectados = infAire - infAcumulado;
-        viajaSanos = viajaAire - infAire - sanAcumulado;
-        origen.sumSanos(-viajaSanos);
-        origen.sumInfectados(-viajaInfectados);
-        destino.sumSanos(viajaSanos);
-        destino.sumInfectados(viajaInfectados);
-        grafo.put(nomDestino, destino);
-
+        if (Objects.nonNull(destino)) {
+            viajaInfectados = infAire - infAcumulado;
+            viajaSanos = viajaAire - infAire - sanAcumulado;
+            origen.sumSanos(-viajaSanos);
+            origen.sumInfectados(-viajaInfectados);
+            destino.sumSanos(viajaSanos);
+            destino.sumInfectados(viajaInfectados);
+            grafo.put(nomDestino, destino);
+        }
         for (int i = 0; i < nMar - 1; i++){
             nomDestino = origen.getMar().get(i);
             destino = grafo.remove(nomDestino);
@@ -384,16 +456,18 @@ public class MapActivity extends AppCompatActivity {
         };
         nomDestino = origen.getMar().get(nMar-1);
         destino = grafo.remove(nomDestino);
-        viajaInfectados = infMar - infAcumulado;
-        viajaSanos = viajaMar - infMar - sanAcumulado;
-        origen.sumSanos(-viajaSanos);
-        origen.sumInfectados(-viajaInfectados);
-        destino.sumSanos(viajaSanos);
-        destino.sumInfectados(viajaInfectados);
-        grafo.put(nomDestino, destino);
+        if (Objects.nonNull(destino)) {
+            viajaInfectados = infMar - infAcumulado;
+            viajaSanos = viajaMar - infMar - sanAcumulado;
+            origen.sumSanos(-viajaSanos);
+            origen.sumInfectados(-viajaInfectados);
+            destino.sumSanos(viajaSanos);
+            destino.sumInfectados(viajaInfectados);
+            grafo.put(nomDestino, destino);
+        }
 
         grafo.put(nomOrigen, origen);
         return grafo;
-    }
+    }*/
 
 }
