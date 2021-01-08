@@ -1,10 +1,13 @@
 package com.example.pracprocesos;
 
 import java.io.Serializable;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Virus implements Serializable {
 
     private String nombre;
+    private int poblacion;
     private int sanos;
     private int infectados;
     private int muertos;
@@ -16,9 +19,9 @@ public class Virus implements Serializable {
     private double Raire;
     private double Rmar;
 
-    public Virus(String nombre){
-        this.nombre = nombre;
-        this.sanos = 10921241;
+    public Virus(){
+        this.nombre = "nombre";
+        this.sanos = 0;
         this.infectados = 0;
         this.muertos = 0;
         this.mortalidad=0.05;
@@ -98,5 +101,26 @@ public class Virus implements Serializable {
 
     public void setRmar(double rmar) {
         Rmar = rmar;
+    }
+
+    public int getPoblacion() {
+        return poblacion;
+    }
+
+    public void setPoblacion(int poblacion) {
+        this.poblacion = poblacion;
+    }
+
+    public void actualizar(ConcurrentHashMap<String, Ciudad> grafo) {
+        this.setPoblacion(0);
+        this.setSanos(0);
+        this.setInfectados(0);
+        this.setMuertos(0);
+        for (Map.Entry<String, Ciudad> entry : grafo.entrySet()) {
+            this.setPoblacion(this.getPoblacion()+entry.getValue().getPoblacion());
+            this.setSanos(this.getSanos()+entry.getValue().getSanos());
+            this.setInfectados(this.getInfectados()+entry.getValue().getInfectados());
+            this.setMuertos(this.getMuertos()+entry.getValue().getMuertos());
+        }
     }
 }

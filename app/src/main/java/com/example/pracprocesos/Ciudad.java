@@ -150,5 +150,11 @@ public class Ciudad {
         this.mar = mar;
     }
 
+    public void setInfectados(int infectados) {
+        this.infectados = infectados;
+    }
 
+    public void setMuertos(int muertos) {
+        this.muertos = muertos;
+    }
 }

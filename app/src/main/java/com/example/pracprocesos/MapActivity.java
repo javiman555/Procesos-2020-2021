@@ -30,6 +30,7 @@ public class MapActivity extends AppCompatActivity {
     Button botonVirus, botonInfectar;
     ImageView imagen_mapa, mapa_zonas;
     ConcurrentHashMap<String, Ciudad> grafo = new ConcurrentHashMap<String,Ciudad>();
+    Virus virus = new Virus();
     int turno = -1;
     Set<String> infectadas = new HashSet<String>();
 
@@ -41,15 +42,16 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
 
         TextView textTurno = (TextView) findViewById(R.id.textView_turno);
-        Virus virus = (Virus) getIntent().getSerializableExtra("virus");
+        virus.setNombre((String)getIntent().getSerializableExtra("virus"));
         botonVirus = (Button) findViewById(R.id.botonVirus);
         botonVirus.setText(virus.getNombre());
-        mostrarVirus(virus);
-
         grafo = InputData("newGameData.txt");
+        virus.actualizar(grafo);
+        mostrarVirus(virus);
 
         botonVirus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                virus.actualizar(grafo);
                 mostrarVirus(virus);
             }
         });
@@ -197,7 +199,7 @@ public class MapActivity extends AppCompatActivity {
             sitio = "Santa Cruz de Tenerife";
         }
         else {
-            sitio = "No se reconoce la zona";
+            sitio = "España";
         }
         System.out.println(sitio);
         if (grafo.get(sitio) != null){
@@ -208,7 +210,10 @@ public class MapActivity extends AppCompatActivity {
                     grafo.get(sitio).getSanos(),
                     grafo.get(sitio).getInfectados(),
                     grafo.get(sitio).getMuertos());
-        } else cambiarDatosLateral(sitio, 0, 0,0);
+        } else {
+            virus.actualizar(grafo);
+            mostrarVirus(virus);
+        }
 
     }
 
@@ -321,11 +326,18 @@ public class MapActivity extends AppCompatActivity {
         else {
             muertos = (int) Math.pow((old_inf * Math.abs(Math.random() * 0.8)), deathline);
         }
+
         int infTotales = infNuevos - muertos;
         ciudad.sumInfectados(infTotales - old_inf);
         ciudad.sumSanos(old_inf - infNuevos);
         ciudad.sumMuertos(muertos);
         ciudad.sumInfectados(-muertos);
+
+        if(turno > 40 && ciudad.getInfectados()< 10){
+            ciudad.setMuertos(ciudad.getMuertos() +ciudad.getInfectados());
+            ciudad.setInfectados(0);
+        }
+        
         grafo.put(nomCiudad, ciudad);
         return grafo;
     }

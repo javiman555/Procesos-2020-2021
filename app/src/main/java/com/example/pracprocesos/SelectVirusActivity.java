@@ -28,10 +28,8 @@ public class SelectVirusActivity extends AppCompatActivity {
 
                 nombreVirus = nombre.getText().toString();
 
-                Virus virus = new Virus(nombreVirus);
-
                 Intent intent = new Intent(SelectVirusActivity.this,MapActivity.class);
-                intent.putExtra("virus",virus);
+                intent.putExtra("virus",nombreVirus);
                 setContentView(R.layout.activity_map);
                 startActivity(intent);
                 finish();
