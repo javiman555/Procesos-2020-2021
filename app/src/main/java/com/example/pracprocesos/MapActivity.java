@@ -97,6 +97,9 @@ public class MapActivity extends AppCompatActivity {
                                 grafo.get(ciudad).getSanos(),
                                 grafo.get(ciudad).getInfectados(),
                                 grafo.get(ciudad).getMuertos());
+                    }else{
+                        virus.actualizar(grafo);
+                        mostrarVirus(virus);
                     }
                     turno++;
                     String aux = "Turno " + turno;
