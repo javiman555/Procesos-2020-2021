@@ -71,7 +71,15 @@ public class Ciudad {
     }
 
     public void sumSanos(int sanos) {
-        this.sanos += sanos;
+        if (this.sanos + sanos < 0) {
+            this.sanos = 0;
+        }
+        else if (this.sanos + sanos > this.poblacion - this.muertos) {
+            this.sanos = this.poblacion - this.muertos;
+        }
+        else {
+            this.sanos += sanos;
+        }
     }
 
     public int getInfectados() {
@@ -79,7 +87,15 @@ public class Ciudad {
     }
 
     public void sumInfectados(int infectados) {
-        this.infectados += infectados;
+        if (this.infectados + infectados < 0) {
+            this.infectados = 0;
+        }
+        else if (this.infectados + infectados > this.poblacion - this.muertos){
+            this.infectados = this.poblacion - this.muertos;
+        }
+        else {
+            this.infectados += infectados;
+        }
     }
 
     public int getMuertos() {
@@ -87,7 +103,15 @@ public class Ciudad {
     }
 
     public void sumMuertos(int muertos) {
-        this.muertos += muertos;
+        if (this.muertos + muertos > this.poblacion) {
+            this.muertos = this.poblacion;
+        }
+        else if (this.muertos + muertos < 0) {
+            this.muertos = 0;
+        }
+        else {
+            this.muertos += muertos;
+        }
     }
 
     public int getTotalsanitario() {

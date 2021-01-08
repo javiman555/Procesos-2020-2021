@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static java.lang.Math.random;
 
@@ -28,7 +29,7 @@ public class MapActivity extends AppCompatActivity {
     TextView lugar, sanos, infectados, muertos, textTurno;
     Button botonVirus, botonInfectar;
     ImageView imagen_mapa, mapa_zonas;
-    HashMap<String, Ciudad> grafo = new HashMap<>();
+    ConcurrentHashMap<String, Ciudad> grafo = new ConcurrentHashMap<String,Ciudad>();
     int turno = -1;
     Set<String> infectadas = new HashSet<String>();
 
@@ -78,13 +79,14 @@ public class MapActivity extends AppCompatActivity {
                 if (grafo.get(ciudad) != null){
 
                     if (turno > -1) {
-                        double porcInf = (grafo.get(ciudad).getInfectados() / grafo.get(ciudad).getSanos()) * 100;
-                        grafo = propagacion(grafo,ciudad);
                         grafo = viajes(grafo);
+                        for (String c : infectadas) {
+                            grafo = propagacion(grafo,c);
+                        }
                     }
                     else {
-                        grafo.get(ciudad).sumSanos(-1000);
-                        grafo.get(ciudad).sumInfectados(1000);
+                        grafo.get(ciudad).sumSanos(-10);
+                        grafo.get(ciudad).sumInfectados(10);
                         botonInfectar.setText("Siguiente turno");
                         infectadas.add(ciudad);
                     }
@@ -232,8 +234,8 @@ public class MapActivity extends AppCompatActivity {
      * CARGAR DATOS
      */
 
-    public HashMap<String, Ciudad> InputData(String archivo) {
-        HashMap<String, Ciudad> mapa = new HashMap<>();
+    public ConcurrentHashMap<String, Ciudad> InputData(String archivo) {
+        ConcurrentHashMap<String, Ciudad> mapa = new ConcurrentHashMap<>();
         try {
             InputStream is = getAssets().open(archivo);
             int size = is.available();
@@ -298,67 +300,84 @@ public class MapActivity extends AppCompatActivity {
      */
     Random rand = new Random();
     float d_min = Float.MAX_VALUE;
-    HashMap<String, Ciudad> propagacion(HashMap<String, Ciudad> grafo, String nomCiudad){ //Devuelve el grafo
+    ConcurrentHashMap<String, Ciudad> propagacion(ConcurrentHashMap<String, Ciudad> grafo, String nomCiudad){ //Devuelve el grafo
         Ciudad ciudad = grafo.remove(nomCiudad);
         int old_inf = ciudad.getInfectados();
         float densidad = ciudad.getPoblacion()/ciudad.getSuperficie();
         d_min = Math.min(densidad, d_min);
         float deathline = 1f;
-        if (ciudad.getInfectados() > ciudad.getHospitalizados()) deathline = 1.5f;
-        int infNuevos = (int) Math.round(Math.pow((2*Math.log(densidad) - 2*Math.log(Math.max(100, d_min)) + 1) * old_inf, deathline));
-        //int muertos = (int) Math.pow((old_inf * Math.abs(rand.nextGaussian())), deathline);
-        int muertos = 0;
+        if (ciudad.getInfectados() > ciudad.getHospitalizados()) deathline = 1.0000005f;
+        int infNuevos = (int) Math.round(0.3*Math.pow((Math.log(densidad) - 0.3*Math.log(Math.max(100, d_min)) + 1) * old_inf, deathline));
+        int muertos;
+        if (turno < 20) {
+            muertos = (int) Math.pow((old_inf * Math.abs(Math.random() * 0.1)), deathline);
+        }
+        else if (turno < 40) {
+            muertos = (int) Math.pow((old_inf * Math.abs(Math.random() * 0.2)), deathline);
+        }
+        else if (turno < 60) {
+            muertos = (int) Math.pow((old_inf * Math.abs(Math.random() * 0.5)), deathline);
+        }
+        else {
+            muertos = (int) Math.pow((old_inf * Math.abs(Math.random() * 0.8)), deathline);
+        }
         int infTotales = infNuevos - muertos;
         ciudad.sumInfectados(infTotales - old_inf);
         ciudad.sumSanos(old_inf - infNuevos);
         ciudad.sumMuertos(muertos);
-        ciudad.sumPoblacion(-muertos);
+        ciudad.sumInfectados(-muertos);
         grafo.put(nomCiudad, ciudad);
         return grafo;
     }
 
-    HashMap<String, Ciudad> viajes(HashMap<String, Ciudad> grafo){
+    ConcurrentHashMap<String, Ciudad> viajes(ConcurrentHashMap<String, Ciudad> grafo){
         Set<String> infec_antiguos = new HashSet<>(infectadas);
 
         for (String c : infec_antiguos) {
             Ciudad origen = grafo.get(c);
             int infectados = origen.getInfectados();
-            int viajaTierra = (int) Math.round(0.035 * infectados);
-            int viajaMar = (int) Math.round(0.003 * infectados);
-            int viajaAire = (int) Math.round(0.012 * infectados);
-            ArrayList<String> conexiones_tierra = origen.getTierra();
-            ArrayList<String> conexiones_mar = origen.getMar();
-            ArrayList<String> conexiones_aire = origen.getAire();
-            if (!conexiones_tierra.isEmpty()) {
-                for (String t : conexiones_tierra) {
-                    if (!infec_antiguos.contains(t)) {
-                        Ciudad destino = grafo.get(t);
-                        int sanos_destino = destino.getSanos();
-                        destino.sumInfectados(viajaTierra);
-                        destino.sumSanos(-viajaTierra);
-                        infectadas.add(t);
+            if ((infectados > 500)) {
+                int viajaTierra, viajaAire, viajaMar;
+                ArrayList<String> conexiones_tierra = origen.getTierra();
+                ArrayList<String> conexiones_mar = origen.getMar();
+                ArrayList<String> conexiones_aire = origen.getAire();
+                if (!conexiones_tierra.isEmpty()) {
+                    for (String t : conexiones_tierra) {
+                        double prob = Math.random();
+                        if (!infec_antiguos.contains(t) && (prob > 0.6)) {
+                            Ciudad destino = grafo.get(t);
+                            int sanos_destino = destino.getSanos();
+                            viajaTierra = (int) Math.round((0.035 * infectados * 0.9) + (0.035 * infectados * Math.random() * 0.1));
+                            destino.sumInfectados(viajaTierra);
+                            destino.sumSanos(-viajaTierra);
+                            infectadas.add(t);
+                        }
                     }
                 }
-            }
-            if (!conexiones_aire.isEmpty()) {
-                for (String a : conexiones_aire) {
-                    if (!infec_antiguos.contains(a)) {
-                        Ciudad destino = grafo.get(a);
-                        int sanos_destino = destino.getSanos();
-                        destino.sumInfectados(viajaAire);
-                        destino.sumSanos(-viajaAire);
-                        infectadas.add(a);
+                if (!conexiones_aire.isEmpty()) {
+                    for (String a : conexiones_aire) {
+                        double prob = Math.random();
+                        if (!infec_antiguos.contains(a) && (prob > 0.6)) {
+                            Ciudad destino = grafo.get(a);
+                            int sanos_destino = destino.getSanos();
+                            viajaAire = (int) Math.round((0.012 * infectados * 0.9) + (0.012 * infectados * Math.random() * 0.1));
+                            destino.sumInfectados(viajaAire);
+                            destino.sumSanos(-viajaAire);
+                            infectadas.add(a);
+                        }
                     }
                 }
-            }
-            if (!conexiones_mar.isEmpty()) {
-                for (String m : conexiones_mar) {
-                    if (!infec_antiguos.contains(m)) {
-                        Ciudad destino = grafo.get(m);
-                        int sanos_destino = destino.getSanos();
-                        destino.sumInfectados(viajaMar);
-                        destino.sumSanos(-viajaMar);
-                        infectadas.add(m);
+                if (!conexiones_mar.isEmpty()) {
+                    for (String m : conexiones_mar) {
+                        double prob = Math.random();
+                        if (!infec_antiguos.contains(m) && (prob > 0.6)) {
+                            Ciudad destino = grafo.get(m);
+                            int sanos_destino = destino.getSanos();
+                            viajaMar = (int) Math.round((0.003 * infectados * 0.9) + (0.003 * infectados * Math.random() * 0.1));
+                            destino.sumInfectados(viajaMar);
+                            destino.sumSanos(-viajaMar);
+                            infectadas.add(m);
+                        }
                     }
                 }
             }
