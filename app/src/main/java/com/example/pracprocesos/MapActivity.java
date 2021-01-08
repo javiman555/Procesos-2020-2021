@@ -78,29 +78,31 @@ public class MapActivity extends AppCompatActivity {
             public void onClick(View v) {
                 lugar = (TextView) findViewById(R.id.lugar);
                 String ciudad = (String) lugar.getText();
-                if (grafo.get(ciudad) != null){
 
+                if ((turno > -1) || (grafo.get(ciudad) != null)) {
                     if (turno > -1) {
                         grafo = viajes(grafo);
                         for (String c : infectadas) {
                             grafo = propagacion(grafo,c);
                         }
                     }
-                    else {
+                    else {   // Primer turno, hace falta ciudad
                         grafo.get(ciudad).sumSanos(-10);
                         grafo.get(ciudad).sumInfectados(10);
                         botonInfectar.setText("Siguiente turno");
                         infectadas.add(ciudad);
                     }
-
+                    if (grafo.get(ciudad) != null) {
+                        cambiarDatosLateral(ciudad,
+                                grafo.get(ciudad).getSanos(),
+                                grafo.get(ciudad).getInfectados(),
+                                grafo.get(ciudad).getMuertos());
+                    }
                     turno++;
-                    cambiarDatosLateral(ciudad,
-                            grafo.get(ciudad).getSanos(),
-                            grafo.get(ciudad).getInfectados(),
-                            grafo.get(ciudad).getMuertos());
                     String aux = "Turno " + turno;
                     textTurno.setText(aux);
                 }
+
             }
         });
     }
